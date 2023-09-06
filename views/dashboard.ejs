@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body><% if (user) { %>
+    <h1>User Details</h1>
+    <p>Name: <%= user.name %></p>
+    <p>Email: <%= user.email %></p>
+    <p>Contact: <%= user.contact %></p>
+    <!-- Add more fields as needed -->
+  <% } else { %>
+    <p>User data is not available.</p>
+  <% } %>
+  
+  <form id="myForm" action="/dashboard" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Enter png Icon (Optional)</label>
+      <input type="file" id="photo" name="image" /><br /><br />
+    </div>
+
+    <div class="mb-3">
+        <label for="service" class="form-label">Service</label>
+        <input type="text" id="service" name="service" /><br /><br />
+    </div>
+
+    <div class="mb-3">
+        <label for="namehome" class="form-label">Name Home</label>
+        <input type="text" id="namehome" name="namehome" /><br /><br />
+    </div>
+
+    <div class="mb-3">
+      <label for="forValue" class="form-label">For</label>
+      <input type="text" id="forValue" name="forValue" /><br /><br />
+  </div>
+
+    <div class="mb-3">
+        <label for="highlight" class="form-label">Highlight</label>
+        <input type="text" id="highlight" name="highlight" /><br /><br />
+    </div>
+
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" id="location" name="location" /><br /><br />
+        <button type="button" onclick="getLocation()">Get Current Location</button>
+
+    </div>
+
+    <div class="mb-3">
+        <label for="contact" class="form-label">Contact</label>
+        <input type="text" id="contact" name="contact" /><br /><br />
+    </div>
+
+     <!-- Adding hidden input fields for latitude and longitude -->
+  <input type="hidden" id="latitude" name="latitude" />
+  <input type="hidden" id="longitude" name="longitude" />
+
+
+    <button type="submit" class="btn btn-light mt-3">ADD</button> 
+    <!-- <p>Not a member? <a href="#">Signup now</a></p> -->
+</form>
+<a href="/logout">logout</a>
+
+<!-- Add this JavaScript code to your HTML file -->
+<script>function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(sendLocation);
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
+}
+
+async function sendLocation(position) {
+  const { latitude, longitude } = position.coords;
+
+  // Make an API request to OpenCage Geocoding using fetch
+  try {
+    const apiKey = '39a5aeb3daa64655b405c79ad98952ba'; // Replace with your API key
+    const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}`;
+
+    const response = await fetch(apiUrl);
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.results.length > 0) {
+        const location = data.results[0].formatted;
+
+        // Set the value of the "location" input field with the retrieved address
+        const locationInput = document.getElementById('location');
+        locationInput.value = location;
+      } else {
+        console.log('Address not found.');
+      }
+    } else {
+      console.error('Error fetching address:', response.status);
+    }
+  } catch (error) {
+    console.error('Error fetching address:', error);
+  }
+}
+
+</script>
+
+</body>
+</html>

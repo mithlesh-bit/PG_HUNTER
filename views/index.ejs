@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <a href="/register">register</a><br><br>
+    <a href="/login">login</a><br><br>
+    <a href="/dashboard">protected</a>
+
+    
+    <h1>User Details</h1>
+    <ul>
+        <% details.forEach(function(user) { %>
+            <li>
+                <a href="/user-details?userId=<%= user._id %>">
+                    <p>Name: <%= user.name %></p>
+                    <p>Location: <%= user.location %></p>
+                    <hr style="width: 100%; background-color: red;">
+                </a>
+            </li>
+        <% }); %>
+    </ul>
+    <% if (details.length === 0) { %>
+        <p>No user data available.</p>
+    <% } %>
+</body>
+</html>

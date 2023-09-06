@@ -1,0 +1,22 @@
+<!-- user-details.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (head content) ... -->
+</head>
+<body>
+    <h1>User Details</h1>
+
+    <div>
+        <p>Name: <%= userDetails.name %></p>
+        <p>Location: <%= userDetails.location %></p>
+        <!-- Add more user details as needed -->
+
+        <!-- Loop through and display user images -->
+        <% userDetails.image.forEach(function(img) { %>
+            <img src="<%= img.url %>" >
+        <% }); %>
+    </div>
+</body>
+</html>
