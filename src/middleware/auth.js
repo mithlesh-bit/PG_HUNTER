@@ -6,9 +6,9 @@ const auth=async(req,resp,next)=>{
         const token  =req.cookies.jwt;
         const verify=jwt.verify(token,process.env.secretKey)
         const user= await Register.findOne({_id:verify._id})
-        resp.render("dashboard",{user})
+        
         // console.log("user details",user);
-        // next();
+        next();
 
     } catch (error) {
         resp.status(401).send("login timeout please login ")

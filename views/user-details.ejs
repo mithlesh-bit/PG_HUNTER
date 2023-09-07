@@ -9,7 +9,9 @@
     <h1>User Details</h1>
 
     <div>
+        
         <p>Name: <%= userDetails.name %></p>
+        <p>contact: <%= userDetails.contact %></p>
         <p>Location: <%= userDetails.location %></p>
         <% userDetails.image.forEach(function(img) { %>
             <img src="<%= img.url %>" >

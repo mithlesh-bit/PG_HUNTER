@@ -11,7 +11,7 @@ const registerSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true 
     },
 
     password: {
@@ -38,8 +38,7 @@ const registerSchema = new mongoose.Schema({
     location: String,
     contact: {
         type: Number,
-        
-        unique: true
+       unique:true
     },
     current_status: String,
     image: [{

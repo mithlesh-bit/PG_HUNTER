@@ -6,7 +6,7 @@
     <link href="/dist/output.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<body><% if (user && user.image && user.image.length > 0) { %>
+<body><% if (user ) { %>
   <h1>User Details</h1>
   <p>Name: <%= user.name %></p>
   <p>Email: <%= user.email %></p>

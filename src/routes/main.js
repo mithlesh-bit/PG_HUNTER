@@ -42,10 +42,11 @@ routes.delete('/deleteImage/:imageId', async (req, res) => {
     }
   });
 // dashboard
-routes.get('/dashboard', auth, (req, resp) => {
-
-    resp.render('dashboard')
-
+routes.get('/dashboard', auth, async(req, resp) => {
+  const token  =req.cookies.jwt;
+        const verify=jwt.verify(token,process.env.secretKey)
+        const user= await Register.findOne({_id:verify._id})
+  resp.render("dashboard",{user})
 });
 
 
@@ -146,16 +147,11 @@ routes.post('/register', async (req, resp) => {
             const userdata = new Register({
                 name: req.body.name,
                 email: req.body.email,
+                contact: req.body.contact,
                 password: req.body.pass,
                 confirmpassword: req.body.repass,
 
-                // service: 'nill',
-                // namehome: 'nill',
-                // for: 'nill',
-                // highlight: 'nill',
-                // location:'nill',
-                // contact: 666,
-                // current_status: 'nill',
+                //
                 // // image:'nill'
 
             })
@@ -168,7 +164,7 @@ routes.post('/register', async (req, resp) => {
                 httpOnly: true
             });
             const registered = await userdata.save()
-            resp.status(201).render('index')
+            resp.status(201).render('register')
         } else {
             resp.send("pass not matching")
         }
