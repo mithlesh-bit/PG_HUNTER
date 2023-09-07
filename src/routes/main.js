@@ -11,12 +11,36 @@ const Mailgen = require("mailgen");
 const upload=require('../multer')
 const cloudinary = require("../middleware/utils/cloudinary");
 
-
-
-
-routes.get('/user', (req, resp) => {
-    resp.send("hii from routes")
-})
+// image delete
+routes.delete('/deleteImage/:imageId', async (req, res) => {
+    const { imageId } = req.params;
+    const token = req.cookies.jwt;
+      const verify = jwt.verify(token, process.env.secretKey);
+    try {
+      // Find the user and remove the image with the specified _id
+      const user = await Register.findById(verify._id);
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+  
+      const imageIndex = user.image.findIndex((img) => img._id.toString() === imageId);
+  
+      if (imageIndex === -1) {
+        return res.status(404).send('Image not found');
+      }
+  
+      // Remove the image from the array
+      user.image.splice(imageIndex, 1);
+  
+      // Save the updated user
+      await user.save();
+  
+      res.status(204).send();
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 // dashboard
 routes.get('/dashboard', auth, (req, resp) => {
 

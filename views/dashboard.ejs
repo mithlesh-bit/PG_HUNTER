@@ -6,16 +6,20 @@
     <link href="/dist/output.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<body><% if (user) { %>
-    <h1>User Details</h1>
-    <p>Name: <%= user.name %></p>
-    <p>Email: <%= user.email %></p>
-    <p>Contact: <%= user.contact %></p>
-    <!-- Add more fields as needed -->
-  <% } else { %>
-    <p>User data is not available.</p>
-  <% } %>
-  
+<body><% if (user && user.image && user.image.length > 0) { %>
+  <h1>User Details</h1>
+  <p>Name: <%= user.name %></p>
+  <p>Email: <%= user.email %></p>
+  <p>Contact: <%= user.contact %></p>
+
+  <!-- Iterate through user images and display with delete buttons -->
+  <% for (let index = 0; index < user.image.length; index++) { %>
+    <img src="<%= user.image[index].url %>" >
+    <button data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">Delete</button>
+<% } %>
+<% } else { %>
+  <p>User data is not available.</p>
+<% } %>
   <form id="myForm" action="/dashboard" method="post" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Enter png Icon (Optional)</label>
@@ -65,7 +69,8 @@
 <a href="/logout">logout</a>
 
 <!-- Add this JavaScript code to your HTML file -->
-<script>function getLocation() {
+<script>
+function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(sendLocation);
   } else {
@@ -103,6 +108,29 @@ async function sendLocation(position) {
 }
 
 </script>
+<script>
+function deleteImage(button) {
+  const imageId = button.getAttribute('data-id');
 
+  // Make an HTTP DELETE request to the server to delete the image by its _id
+  fetch(`/deleteImage/${imageId}`, {
+    method: 'DELETE',
+  })
+    .then((response) => {
+      if (response.status === 204) {
+        // The image was successfully deleted
+        // You can update the UI or perform any other necessary actions
+        location.reload(); // Refresh the page to reflect the updated image list
+      } else {
+        // Handle error response
+        console.error('Failed to delete image');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+</script>
 </body>
 </html>
