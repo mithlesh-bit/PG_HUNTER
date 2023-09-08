@@ -292,14 +292,8 @@ routes.post('/reset-pass/:_id/:token', async (req, resp) => {
 
   // Update the password in the database
   const updateResult = await Register.updateOne({ _id }, { $set: { password, confirmpassword: password2 } });
+  resp.json({ message: "Password successfully updated" });
 
-  if (updateResult.ok === 1) {
-      // Password updated successfully
-      resp.json({ message: "Password successfully updated" });
-  } else {
-      // Password update failed
-      resp.status(500).json({ error: "Password update failed" });
-  }
 });
 
 
