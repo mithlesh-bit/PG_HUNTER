@@ -5,20 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
     <title>login</title>
 </head>
 
 <body>
-    <h1>login page hai bhai</h1>
 
-    <form action="/login" method="post">
-        <input type="email" name="email">email <br><br>
-        <input type="text" name="pass">pass <br> <br>
-        <button type="submit">submit</button>
-        <br>
-        <a href="forgot-pass">forgotpass</a>
+    <div class="container">
+  
+      <form action="/login" method="post">
+        
+            <div class="segments">
+              <h1>Welcome back</h1>
 
-    </form>
+              <p>
+                <span>Find your guest now on</span>
+                <span>PG</span>
+                <span>Hunter.</span>
+                <br /> 
+              </p>
+            </div>
+            
+            <label>
+              <input 
+                type="email" 
+                name="email"
+                placeholder="Email Address"/>
+            </label>
+
+            <label>
+              <input 
+              name="pass"
+              type="password" 
+              placeholder="Password"/>
+            </label>
+            
+            <p>Forgot password</p>
+
+            <button class="red" type="submit">
+              <i class="fa-solid fa-lock"></i>
+              Log in
+            </button>
+            
+            <div class="segment">
+              <button class="unit" type="button"><i class="fa-solid fa-arrow-left"></i></button>
+              <button class="unit" type="button">Register</button>
+            </div>
+            
+            
+          </form>
+          
+
+          
+          <div class="loginimg">
+            <img class="background" src="/assets/background.jpg" alt="background">
+            <!-- <img class="logimg" src="/assets/pg.jpg" alt="pg">   -->
+          </div>
+
+
+    </div>
+
+      
 
 
 </body>
