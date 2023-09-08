@@ -4,7 +4,6 @@ html {
 }
 body{
   position: relative;
-  overflow: hidden;
 }
 
 body,
@@ -162,4 +161,48 @@ button.red {
   max-width: 550px;
   min-height: 400px;
   max-height: 550px;
+}
+
+
+.forget_container{
+  display: none;
+  position: absolute;
+  width: 95%;
+  height: 100%;
+  max-width: 450px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forget_container>form{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 500px;
+  background-color: #ebecf0;
+  border-radius: 10px;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.background{
+  border-radius: 10px;
+}
+
+.forget_container.active{
+  display: flex;
+}
+
+.forget_container>form>h1{
+  margin-bottom: 3.5rem;
+}
+.forget_container>form>button{
+  width: 10rem;
+  margin-top: 2rem;
+}
+
+.close{
+  position: absolute;
+  cursor: pointer;
+  top: 1rem;
+  right: 1rem;
 }
