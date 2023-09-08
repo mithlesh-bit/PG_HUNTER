@@ -272,29 +272,37 @@ const info = await transporter.sendMail({
 // console.log(link);
 })
 
-routes.get('/reset-pass/:_id/:token',async(req,resp)=>{
-const {_id,token}=req.params
-// resp.send(req.params)
-const findinguser=await Register.findOne({_id})
-const verify=jwt.verify(token,process.env.secretKey)
-resp.render('reset-pass',{email:findinguser.email})
-
+routes.get('/reset-pass/:_id/:token', async (req, resp) => {
+  const { _id, token } = req.params;
+  const findinguser = await Register.findOne({ _id });
+  const verify = jwt.verify(token, process.env.secretKey);
+  resp.render('reset-pass', { email: findinguser.email });
 })
-routes.post('/reset-pass/:_id/:token',async(req,resp)=>{
-    const {_id,token}=req.params
-    let {password,password2}=req.body;
-    
-    const verify=jwt.verify(token,process.env.secretKey)
 
-    password = await bcrypt.hash(password, 12);
-    password2 = await bcrypt.hash(password2, 12);
-    const findinguser=await Register.updateOne({_id},{$set:{password,confirmpassword:password2}})
-    resp.cookie("jwt", token, {
-        expires: new Date(Date.now() + 300000),
-        httpOnly: true
-    });
-    resp.render("");
-})
+
+routes.post('/reset-pass/:_id/:token', async (req, resp) => {
+  const { _id, token } = req.params;
+  let { password, password2 } = req.body;
+
+  // Verify the token and update the password
+  const verify = jwt.verify(token, process.env.secretKey);
+
+  password = await bcrypt.hash(password, 12);
+  password2 = await bcrypt.hash(password2, 12);
+
+  // Update the password in the database
+  const updateResult = await Register.updateOne({ _id }, { $set: { password, confirmpassword: password2 } });
+
+  if (updateResult.ok === 1) {
+      // Password updated successfully
+      resp.json({ message: "Password successfully updated" });
+  } else {
+      // Password update failed
+      resp.status(500).json({ error: "Password update failed" });
+  }
+});
+
+
 
 
 
