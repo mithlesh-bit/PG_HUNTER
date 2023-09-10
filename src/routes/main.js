@@ -104,6 +104,9 @@ routes.get('/login', (req, resp) => {
   resp.render('login')
 })
 
+routes.get('/landing', (req, resp) => {
+  resp.render('landing')
+})
 
 // home------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/',async (req, resp) => {
