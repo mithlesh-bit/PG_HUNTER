@@ -1,0 +1,89 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.profile-content {
+    display: flex;
+    padding: 20px;
+}
+
+.profile-image {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+}
+
+.profile-image img {
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+.profile-details {
+    flex: 2;
+    padding: 20px;
+}
+
+.profile-details form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-details label,
+.profile-details input,
+.profile-details textarea {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-details textarea {
+    resize: vertical;
+}
+
+.profile-details button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.photo-gallery {
+    padding: 20px;
+}
+
+.photo-gallery h2 {
+    margin-bottom: 10px;
+}
+
+.photos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photos img {
+    max-width: 200px;
+    margin: 10px;
+    border-radius: 4px;
+}

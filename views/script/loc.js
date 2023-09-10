@@ -10,8 +10,10 @@ function findMyCordinates() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (postion)=>{
-        const bdcAPI =  `https://api-bdc.net/data/reverse-geocode-with-timezone?
-        latitude=${postion.coords.latitude}&longitude=${postion.coords.longitude}`   
+        const bdcAPI=`https://nominatim.openstreetmap.org/reverse?lat=${postion.coords.latitude}&lon=${postion.coords.longitude}&<params>
+        `
+        // const bdcAPI =  `https://api-bdc.net/data/reverse-geocode-with-timezone?
+        // latitude=${postion.coords.latitude}&longitude=${postion.coords.longitude}`   
         getAPI(bdcAPI)
       },
       (error)=>{

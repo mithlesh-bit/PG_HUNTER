@@ -17,31 +17,25 @@ routes.delete('/deleteImage/:imageId', async (req, res) => {
     const token = req.cookies.jwt;
       const verify = jwt.verify(token, process.env.secretKey);
     try {
-      // Find the user and remove the image with the specified _id
       const user = await Register.findById(verify._id);
       if (!user) {
         return res.status(404).send('User not found');
       }
-  
       const imageIndex = user.image.findIndex((img) => img._id.toString() === imageId);
-  
       if (imageIndex === -1) {
         return res.status(404).send('Image not found');
       }
-  
-      // Remove the image from the array
-      user.image.splice(imageIndex, 1);
-  
-      // Save the updated user
-      await user.save();
-  
+        user.image.splice(imageIndex, 1);
+        await user.save();
       res.status(204).send();
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
   });
-// dashboard
+
+
+// dashboard--------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/dashboard', auth, async(req, resp) => {
   const token  =req.cookies.jwt;
         const verify=jwt.verify(token,process.env.secretKey)
@@ -49,25 +43,15 @@ routes.get('/dashboard', auth, async(req, resp) => {
   resp.render("dashboard",{user})
 });
 
-
-
-
 routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) => {
     try {
       const token = req.cookies.jwt;
       const verify = jwt.verify(token, process.env.secretKey);
-  
-      // Fetch the user's current data
-      const user = await Register.findById(verify._id);
-  
+        const user = await Register.findById(verify._id);
       if (!user) {
         return resp.status(401).send("User not found.");
       }
-  
-      // Handle updating additional details
       const { service, namehome, forValue, highlight, location, contact, latitude, longitude } = req.body;
-  
-      // Update the user's additional details if they are provided
       if (service) user.service = service;
       if (namehome) user.namehome = namehome;
       if (forValue) user.for = forValue;
@@ -81,14 +65,13 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
         user.longitude = longitude;
       }
   
-      // Handle uploading the image if it's provided
+      // Handle uploading the image 
       if (req.file) {
         cloudinary.uploader.upload(req.file.path, async (err, result) => {
           if (err) {
             console.error(err);
             return resp.status(500).send("Upload failed.");
           }
-  
           // Push the new image URL into the 'image' array
           user.image.push({ url: result.secure_url });
   
@@ -110,11 +93,19 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
   
   
 
-
+// logout--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/logout', (req, resp) => {
     resp.clearCookie('jwt')
     resp.redirect('/')
 })
+
+// logOut---------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+routes.get('/login', (req, resp) => {
+  resp.render('login')
+})
+
+
+// home------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/',async (req, resp) => {
     const details=await Register.find()
     try {
@@ -132,9 +123,7 @@ routes.get('/user-details', async(req, resp) => {
 
 });
 
-routes.get('/login', (req, resp) => {
-    resp.render('login')
-})
+
 routes.get('/register', (req, resp) => {
     resp.render('register')
 })
@@ -150,10 +139,6 @@ routes.post('/register', async (req, resp) => {
                 contact: req.body.contact,
                 password: req.body.pass,
                 confirmpassword: req.body.repass,
-
-                //
-                // // image:'nill'
-
             })
 
             const token = await userdata.generateAuthToken()
