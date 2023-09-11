@@ -2,36 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roomoza</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/index.css" />
-    <!-- Unicons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-<!-- alert message -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-
-    <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="/assets/img/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roomoza</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/index.css" />
+  <!-- Unicons -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-    <header class="header">
-        <nav class="nav">
-            <a href="#" class="nav_logo">ROOMOZA</a>
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="nav_logo">ROOMOZA</a>
 
-            <ul class="nav_items">
-                <li class="nav_item">
-                    <a href="#" class="nav_link">Home</a>
-                    <a href="#" class="nav_link">Find PG</a>
-                    <a href="#" class="nav_link">Services</a>
-                    <a href="/landing" class="nav_link">About</a>
-                </li>
-            </ul>
+      <ul class="nav_items">
+        <li class="nav_item">
+          <a href="#" class="nav_link">Home</a>
+          <a href="#" class="nav_link">Find PG</a>
+          <a href="#" class="nav_link">Services</a>
+          <a href="/landing" class="nav_link">About</a>
+        </li>
+      </ul>
 
             
             <% if (userName && userName.name) { %>
@@ -39,16 +39,40 @@
                   <a  href="dashboard" class="button" id="loginbtn"><%= userName.name %></a>
               </div>
           <% } else { %>
-              <div class="button_grp">
-                  <button class="button" id="signupbtn">signup</button>
-                  <button class="button" id="loginbtn">Login</button>
-              </div>
+        <div class="button_grp">
+          <button class="button" id="signupbtn">signup</button>
+          <button class="button" id="loginbtn">Login</button>
+        </div>
           <% } %>
           
 
 
-        </nav>
-    </header>
+
+
+    </nav>
+  </header>
+
+  <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 75vh;">
+    <div class="absolute top-0 w-full h-full bg-center bg-cover mt-10"
+      style="background-image: url(&quot;https://images.unsplash.com/photo-1628133287836-40bd5453bed1?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80&quot;);">
+      <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-black"></span>
+    </div>
+    <div class="container relative mx-auto mt-10">
+      <div class="items-center flex flex-wrap">
+        <div class="w-full  px-4 ml-auto mr-auto text-center">
+          <div class="pr-12">
+            <h1 class="text-white font-semibold text-5xl">
+              Your story starts with us.
+            </h1>
+            <p class="mt-4 text-lg text-gray-300">
+              Unlock Your Full Potential with Roomoza.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
     <!-- Home -->
     <section class="home">
@@ -59,8 +83,8 @@
   
             <div class="form signup_form" id="loginform">
                 
-              <form id="loginForm" action="/login" method="post" onsubmit="handleLoginFormSubmission(); return false;">
-                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <h2>Login</h2>
         
                     <div class="input_box">
                       <input type="email" placeholder="Enter your email" name="email" required />
@@ -73,108 +97,137 @@
                       <i class="uil uil-eye-slash pw_hide"></i>
                     </div>
         
+                    <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
                     <button class="button" type="submit">Login Now</button>
         
                     <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
-                  </form>
+                  </form> 
 
-            </div>
-          
-  
-          <!-- Signup From -->
-          <div class="form signup_form">
-            <form action="/register" method="post">
-              <h2>Signup</h2>
-  
-              <div class="input_box">
-                <i class="fa fa-user-o" aria-hidden="true"></i>
-                <input type="text" placeholder="Enter your name"  name="name" required />
-              </div>
-  
-              <div class="input_box">
-                <input type="email" placeholder="Enter your email" name="email" required />
-                <i class="uil uil-envelope-alt email"></i>
-              </div>
+      </div>
 
-              <div class="input_box">
-                <img width="23" height="23" src="https://img.icons8.com/ios/50/phone--v1.png" alt="phone--v1"/>
-                <input type="number" placeholder="Enter phone number"  name="contact" required />
-              </div>
 
-              <div class="input_box">
-                <input type="password" placeholder="Create password" name="pass" required />
-                <i class="uil uil-lock password"></i>
-                <i class="uil uil-eye-slash pw_hide"></i>
-              </div>
-              <div class="input_box">
-                <input type="password" placeholder="Confirm password" name="repass" required />
-                <i class="uil uil-lock password"></i>
-                <i class="uil uil-eye-slash pw_hide"></i>
-              </div>
-  
-              <button class="button" type="submit">Signup Now</button>
-  
-              <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
-            </form>
+      <!-- Signup From -->
+      <div class="form signup_form">
+        <form action="/register" method="post">
+          <h2>Signup</h2>
+
+          <div class="input_box">
+            <i class="fa fa-user-o" aria-hidden="true"></i>
+            <input type="text" placeholder="Enter your name" name="name" required />
           </div>
-        </div>
-      </section>
+
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" name="email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+
+          <div class="input_box">
+            <img width="23" height="23" src="https://img.icons8.com/ios/50/phone--v1.png" alt="phone--v1" />
+            <input type="number" placeholder="Enter phone number" name="contact" required />
+          </div>
+
+          <div class="input_box">
+            <input type="password" placeholder="Create password" name="pass" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+          <div class="input_box">
+            <input type="password" placeholder="Confirm password" name="repass" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+
+          <button class="button" type="submit">Signup Now</button>
+
+          <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+        </form>
+      </div>
+
+      <!-- forgot password  -->
+      <div class="form signup_form" id="forgot">
+
+        <form action="/forgot-pass" method="post">
+          <h2>Forgot Password</h2>
+
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" name="email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+
+          <button class="button">send</button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
 
     <!-- list start -->
-    <%- include('list.ejs', { details: details }) %>
+    <%- include('list.ejs') %>
 
 
 
-    <script>
-        const signbtn = document.querySelector("#signupbtn"),
+<script>
+    const signbtn = document.querySelector("#signupbtn"),
         loginbtn = document.querySelector("#loginbtn"),
         home = document.querySelector(".home"),
+        forgot = document.querySelector("#forgot"),
         formContainer = document.querySelector(".form_container"),
         formCloseBtn = document.querySelector(".form_close"),
         pwShowHide = document.querySelectorAll(".pw_hide"),
         loginform = document.querySelector("#loginform"),
         loginlink = document.querySelector("#login"),
-        signuplink = document.querySelector("#signup");
+        signuplink = document.querySelector("#signup"),
+        forgotlink = document.querySelector("#forgotlink");
 
 
-        signbtn.addEventListener("click", () => signuppage())
-        signuplink.addEventListener("click", () => signuppage())
-        loginbtn.addEventListener("click", () => loginpage());
-        loginlink.addEventListener("click", () => loginpage());
+      signbtn.addEventListener("click", () => signuppage())
+      signuplink.addEventListener("click", () => signuppage())
+      loginbtn.addEventListener("click", () => loginpage());
+      loginlink.addEventListener("click", () => loginpage());
+      forgotlink.addEventListener("click", () => forgetpage());
 
-        function signuppage() {
-            home.classList.add("show")
-            formContainer.classList.add("active");
-            loginform.style.display = "none";
-        }
+      function forgetpage(){
+        loginform.style.display = "none";
+        forgot.style.display = "block";
+      }
 
-        function loginpage() {
-            home.classList.add("show")
-            formContainer.classList.remove("active");
-            loginform.style.display = "block";
-        }
+      function signuppage() {
+        home.classList.add("show")
+        formContainer.classList.add("active");
+        loginform.style.display = "none";
+        forgot.style.display = "none";
         
+      }
+
+      function loginpage() {
+        home.classList.add("show")
+        formContainer.classList.remove("active");
+        loginform.style.display = "block";
+        
+      }
+
+      
+
+      formCloseBtn.addEventListener("click", () => {
+        home.classList.remove("show")
+      })
 
 
-        formCloseBtn.addEventListener("click",()=>{
-            home.classList.remove("show")
-        })
-    
-
-        pwShowHide.forEach((icon) => {
-            icon.addEventListener("click", () => {
-                let getPwInput = icon.parentElement.querySelector("input");
-                if (getPwInput.type === "password") {
-                    getPwInput.type = "text";
-                    icon.classList.replace("uil-eye-slash", "uil-eye");
-                } else {
-                    getPwInput.type = "password";
-                    icon.classList.replace("uil-eye", "uil-eye-slash");
-                }
-            });
+      pwShowHide.forEach((icon) => {
+        icon.addEventListener("click", () => {
+          let getPwInput = icon.parentElement.querySelector("input");
+          if (getPwInput.type === "password") {
+            getPwInput.type = "text";
+            icon.classList.replace("uil-eye-slash", "uil-eye");
+          } else {
+            getPwInput.type = "password";
+            icon.classList.replace("uil-eye", "uil-eye-slash");
+          }
         });
-        
-        </script>
+      });
+    </script>
     <script>
       function handleLoginFormSubmission() {
 
@@ -215,6 +268,21 @@ const password = form.querySelector('input[name="pass"]').value;
         }
     });
 }
+
+      pwShowHide.forEach((icon) => {
+        icon.addEventListener("click", () => {
+          let getPwInput = icon.parentElement.querySelector("input");
+          if (getPwInput.type === "password") {
+            getPwInput.type = "text";
+            icon.classList.replace("uil-eye-slash", "uil-eye");
+          } else {
+            getPwInput.type = "password";
+            icon.classList.replace("uil-eye", "uil-eye-slash");
+          }
+        });
+      });
+
+
 
     </script>
 </body>
