@@ -51,14 +51,14 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
       if (!user) {
         return resp.status(401).send("User not found.");
       }
-      const { service, namehome, forValue, highlight, location, contact, latitude, longitude } = req.body;
+      const { service, namehome, forValue, highlight, location,current_status, contact, latitude, longitude } = req.body;
       if (service) user.service = service;
       if (namehome) user.namehome = namehome;
       if (forValue) user.for = forValue;
       if (highlight) user.highlight = highlight;
       if (location) user.location = location;
       if (contact) user.contact = contact;
-  
+      if (current_status) user.current_status = current_status;
       // Store latitude and longitude in the user object
       if (latitude && longitude) {
         user.latitude = latitude;
@@ -110,14 +110,34 @@ routes.get('/landing', (req, resp) => {
 
 // home------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/',async (req, resp) => {
-    const details=await Register.find()
-    try {
-        resp.render('index', { details });
-      } catch (error) {
-        console.error(error);
-        resp.status(500).send("Internal Server Error");
-      }
-});
+
+        const token = req.cookies.jwt;
+        let userName
+        if (token) {
+            try {
+                const verify = jwt.verify(token, process.env.secretKey);
+                const userName = await Register.findById(verify._id);
+                const details=await Register.find()
+
+                resp.render('index', { details,userName });
+              } catch (error) {
+                console.error(error);
+                resp.status(500).send("Internal Server Error");
+            }
+        } else {
+          try {
+            
+            const details=await Register.find()
+
+            resp.render('index', { details,userName });
+          } catch (error) {
+            console.error(error);
+            resp.status(500).send("Internal Server Error");
+        }
+        }
+    });
+    
+
 
 routes.get('/user-details', async(req, resp) => {
     const userId = req.query.userId;

@@ -33,10 +33,19 @@
                 </li>
             </ul>
 
-            <div class="button_grp">
-                <button class="button" id="signupbtn">signup</button>
-                <button class="button" id="loginbtn">Login</button>
-            </div>
+            
+            <% if (userName && userName.name) { %>
+              <div class="button_grp">
+                  <a  href="dashboard" class="button" id="loginbtn"><%= userName.name %></a>
+              </div>
+          <% } else { %>
+              <div class="button_grp">
+                  <button class="button" id="signupbtn">signup</button>
+                  <button class="button" id="loginbtn">Login</button>
+              </div>
+          <% } %>
+          
+
 
         </nav>
     </header>
@@ -112,8 +121,7 @@
       </section>
 
     <!-- list start -->
-    <%- include('list.ejs') %>
-
+    <%- include('list.ejs', { details: details }) %>
 
 
 
@@ -185,7 +193,7 @@ const password = form.querySelector('input[name="pass"]').value;
         }
     })
     .then(response => response.json())
-    .then(data => {
+    .then(data => { 
         console.log(data.success);
         if (data.success) { // Compare to the boolean value true
             // Display a success pop-up

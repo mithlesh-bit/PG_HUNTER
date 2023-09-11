@@ -4,30 +4,48 @@
 <section class="light">
 	<div class="container py-2">
 		<div class="h1 text-center text-dark" id="pageHeaderTitle"></div>
-
-		<article class="postcard light blue">
-			<a class="postcard__img_link" href="#">
-				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
-			</a>
-			<div class="postcard__text t-dark">
-				<h1 class="postcard__title blue"><a href="#">Podcast Title</a></h1>
-				<div class="postcard__subtitle small">
-					<time datetime="2020-05-25 12:00:00">
-						<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-					</time>
-				</div>
-				<div class="postcard__bar"></div>
-				<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-				<ul class="postcard__tagbox">
-					<li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
-					<li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
-					<li class="tag__item play blue">
-						<a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
-					</li>
-				</ul>
-			</div>
-		</article>
-		<article class="postcard light red">
+		<% details.forEach(function(user) { %>
+			<article class="postcard light blue">
+				<% if (user.image && user.image.length > 0) { %>
+					<a class="postcard__img_link" href="#">
+					<img src="<%= user.image[0].url %>" alt="First Image" />
+				</a>
+				<% } else { %>
+					<a class="postcard__img_link" href="#">
+						<img src="https://picsum.photos/501/500" alt="First Image" />
+					</a>
+				<% } %>
+								<div class="postcard__text t-dark">
+									<h1 class="postcard__title blue"><a href="#">
+											<%= user.name %>
+										</a></h1>
+									<div class="postcard__subtitle small">
+										<time datetime="2020-05-25 12:00:00">
+											<i class="fas fa-calendar-alt mr-2">
+												<%= user.current_status %>
+											</i>
+										</time>
+									</div>
+									<div class="postcard__bar"></div>
+									<div class="postcard__preview-txt">LOCATION: <%= user.location %>
+									</div>
+									<div class="postcard__preview-txt"> SERVICE: <%= user.service %>
+									</div>
+									<ul class="postcard__tagbox">
+										<li class="tag__item"><i class="fas fa-tag mr-2"></i>
+											<%= user.contact %>
+										</li>
+										<li class="tag__item"><i class="fas fa-clock mr-2"></i>
+											<%= user.for %>
+										</li>
+										<li class="tag__item play blue">
+											<a href="/user-details?userId=<%= user._id %>"><i class="fas fa-play mr-2"></i>see more....</a>
+										</li>
+									</ul>
+								</div>
+			</article>
+			<% }); %>
+				<!-- <article class="postcard light red">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />	
 			</a>
@@ -92,6 +110,6 @@
 					</li>
 				</ul>
 			</div>
-		</article>
+		</article> -->
 	</div>
 </section>
