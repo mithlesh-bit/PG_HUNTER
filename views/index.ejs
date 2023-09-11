@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="/css/index.css" />
     <!-- Unicons -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+<!-- alert message -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
 </head>
 
 <body>
@@ -44,8 +49,8 @@
   
             <div class="form signup_form" id="loginform">
                 
-                <form action="/login" method="post">
-                    <h2>Login</h2>
+              <form id="loginForm" action="/login" method="post" onsubmit="handleLoginFormSubmission(); return false;">
+                <h2>Login</h2>
         
                     <div class="input_box">
                       <input type="email" placeholder="Enter your email" name="email" required />
@@ -58,7 +63,7 @@
                       <i class="uil uil-eye-slash pw_hide"></i>
                     </div>
         
-                    <button class="button">Login Now</button>
+                    <button class="button" type="submit">Login Now</button>
         
                     <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
                   </form>
@@ -159,9 +164,49 @@
                 }
             });
         });
+        
+        </script>
+    <script>
+      function handleLoginFormSubmission() {
+
+        const form = document.getElementById('loginForm');
+
+// Get the email and password values from the form fields
+const email = form.querySelector('input[name="email"]').value;
+const password = form.querySelector('input[name="pass"]').value;
 
 
-    
+    fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify({ email:email, pass: password }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.success);
+        if (data.success) { // Compare to the boolean value true
+            // Display a success pop-up
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: data.message
+            }).then(() => {
+                // Redirect or perform other actions after displaying the pop-up
+                window.location.href = '/';
+            });
+        } else {
+            // Display an error pop-up
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message
+            });
+        }
+    });
+}
+
     </script>
 </body>
 

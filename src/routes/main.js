@@ -149,7 +149,7 @@ routes.post('/register', async (req, resp) => {
                 httpOnly: true
             });
             const registered = await userdata.save()
-            resp.status(201).render('register')
+            resp.status(201).render('index')
         } else {
             resp.send("pass not matching")
         }
@@ -161,35 +161,35 @@ routes.post('/register', async (req, resp) => {
 })
 
 // login post
+
 routes.post('/login', async (req, resp) => {
-    const email = await req.body.email
-    const password = await req.body.pass
-    try {
-        const useremail = await Register.findOne({ email: email })
-        const ismatch = await bcrypt.compare(password, useremail.password)
-        const token = await useremail.generateAuthToken()
+  const email = await req.body.email
+  const password = await req.body.pass
+  try {
+      const useremail = await Register.findOne({ email: email })
+      const ismatch = await bcrypt.compare(password, useremail.password)
+      const token = await useremail.generateAuthToken()
 
-        resp.cookie("jwt", token, {
-            expires: new Date(Date.now() + 30000000),
-            httpOnly: true
-        });
-        if (ismatch) {
-            resp.status(201).redirect('/')
-        } else {
-            resp.send('invalid credential')
-        }
-    } catch (error) {
-        resp.send("user not found")
-    }
+      resp.cookie("jwt", token, {
+          expires: new Date(Date.now() + 30000000),
+          httpOnly: true
+      });
+      if (ismatch) {
+          
+          resp.status(200).json({ success: true, message: 'Login successful' });
 
-})
-
-// forgot password
-
-routes.get('/forgot-pass',(req,resp)=>{
-resp.render('forgot-pass')
+      } else {
+        resp.status(401).json({ success: false, message: 'Login failed' });
+      }
+  } catch (error) {
+      resp.send("user not found")
+  }
 
 })
+
+
+
+
 routes.post('/forgot-pass', async(req,resp)=>{
 const email= await req.body.email;
 const findinguser=await Register.findOne({email})
