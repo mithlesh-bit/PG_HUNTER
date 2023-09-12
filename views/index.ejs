@@ -16,6 +16,9 @@
   <!-- Unicons -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
   <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
+<!-- for alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </head>
 
 <body>
@@ -78,13 +81,12 @@
     <section class="home">
         <div class="form_container">
           <i class="uil uil-times form_close"></i>
+          
           <!-- Login From -->
-        
-  
             <div class="form signup_form" id="loginform">
                 
-                <form action="/login" method="post">
-                    <h2>Login</h2>
+              <form id="loginForm" action="/login" method="post" onsubmit="handleLoginFormSubmission(); return false;">
+                <h2>Login</h2>
         
                     <div class="input_box">
                       <input type="email" placeholder="Enter your email" name="email" required />

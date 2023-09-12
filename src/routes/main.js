@@ -193,19 +193,19 @@ routes.post('/login', async (req, resp) => {
       const ismatch = await bcrypt.compare(password, useremail.password)
       const token = await useremail.generateAuthToken()
 
-      resp.cookie("jwt", token, {
+      
+      if (ismatch) {
+        resp.cookie("jwt", token, {
           expires: new Date(Date.now() + 30000000),
           httpOnly: true
       });
-      if (ismatch) {
-          
           resp.status(200).json({ success: true, message: 'Login successful' });
 
       } else {
         resp.status(401).json({ success: false, message: 'Login failed' });
       }
   } catch (error) {
-      resp.send("user not found")
+    resp.status(401).json({ success: false, message: 'somthing went ' });
   }
 
 })
