@@ -2,17 +2,17 @@
 
 
 <section class="light">
+	<div class="h1 text-center text-dark" id="pageHeaderTitle"></div>
 	<div class="container py-2">
-		<div class="h1 text-center text-dark" id="pageHeaderTitle"></div>
 		<% details.forEach(function(user) { %>
 			<article class="postcard light blue">
 				<% if (user.image && user.image.length > 0) { %>
 					<a class="postcard__img_link" href="#">
-					<img src="<%= user.image[0].url %>" alt="First Image" />
+					<img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
 				</a>
 				<% } else { %>
 					<a class="postcard__img_link" href="#">
-						<img src="https://picsum.photos/501/500" alt="First Image" />
+						<img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
 					</a>
 				<% } %>
 								<div class="postcard__text t-dark">
