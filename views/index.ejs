@@ -12,12 +12,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roomoza</title>
   <link rel="stylesheet" href="/css/style.css" />
-  <link rel="stylesheet" href="/css/index.css" />
   <!-- Unicons -->
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
   <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
   <!-- for alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <link rel="stylesheet" href="/css/index.css" />
 
 </head>
 
@@ -58,7 +57,7 @@
   </header>
 
   <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 75vh;">
-    <div class="absolute top-0 w-full h-full bg-center bg-cover mt-10"
+    <div class="absolute top-0 w-full h-full bg-center bg-cover mt-10 "
       style="background-image: url(&quot;https://images.unsplash.com/photo-1628133287836-40bd5453bed1?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80&quot;);">
       <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-black"></span>
     </div>
@@ -102,7 +101,7 @@
           </div>
 
           <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
-          <button class="button" type="submit">Login Now</button>
+          <button class="button" id="loginnowtext" type="submit">Login Now</button>
 
           <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
         </form>
@@ -237,6 +236,11 @@
 
         const form = document.getElementById('loginForm');
 
+
+        const loginnowtext = document.querySelector("#loginnowtext")
+        loginnowtext.innerHTML = "Processing..."
+        loginnowtext.disabled = true;
+        // loginnowtext = "Processing..."
         // Get the email and password values from the form fields
         const email = form.querySelector('input[name="email"]').value;
         const password = form.querySelector('input[name="pass"]').value;
@@ -270,6 +274,8 @@
                 text: data.message
               });
             }
+            loginnowtext.innerHTML = "Login Now"
+            loginnowtext.disabled = false;
           });
       }
 

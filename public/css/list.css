@@ -62,13 +62,7 @@ a:hover {
   border-radius: 10px;
   margin: 0 0 2rem 0;
   overflow: hidden;
-  position: relative;
   color: #ffffff;
-  z-index: 1;
-}
-
-.postcard.dark {
-  background-color: #18151f;
 }
 
 .postcard.light {
@@ -130,6 +124,7 @@ a:hover {
   flex-direction: column;
 }
 
+
 .postcard .postcard__preview-txt {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -163,7 +158,6 @@ a:hover {
 
 .postcard:before {
   content: "";
-  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -208,7 +202,6 @@ a:hover {
 
   .postcard.media.postcard__text:before {
     content: "";
-    position: absolute;
     display: block;
     background: #18151f;
     top: -20%;

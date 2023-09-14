@@ -163,3 +163,24 @@ section {
 section{
   background-color: #ebebeb;
 }
+
+.logbutton {
+    padding: 5px 20px;
+    border: 2px solid #ff5c5c;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #000; 
+    display: flex;
+    transition: all 0.2s ease-in-out;
+  }
+
+.logbutton:hover{
+    background-color: #ff5c5c;
+    color: #fff;
+}
+a{
+    display: inline-block;
+}
+.update{
+    border: 2px solid black;
+}
