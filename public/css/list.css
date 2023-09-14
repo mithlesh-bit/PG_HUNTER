@@ -109,6 +109,11 @@ a:hover {
   display: contents;
 }
 
+.postcard .postcard__img {
+  width: 40%;
+  max-width: 200px;
+}
+
 .postcard .postcard__bar {
   width: 50px;
   height: 10px;
@@ -186,10 +191,15 @@ a:hover {
   }
 
   .postcard .postcard__img {
+    width: unset
+    max-width: unset
+  }
+  .postcard .postcard__img {
     max-width: 300px;
     max-height: 100%;
     transition: transform 0.3s ease;
   }
+
 
   .postcard .postcard__text {
     padding: 3rem;
@@ -207,6 +217,7 @@ a:hover {
   }
 
   .postcard:hover .postcard__img {
+    max-width: 500px
     transform: scale(1.1);
   }
 
@@ -232,6 +243,11 @@ a:hover {
 @media screen and (min-width: 1024px) {
   .postcard .postcard__text {
     padding: 2rem 3.5rem;
+  }
+
+  .postcard .postcard__img {
+    width: unset
+    max-width: unset
   }
 
   .postcard .postcard__text:before {
@@ -375,4 +391,18 @@ a:hover {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+  .postcard .postcard__img {
+    max-width: unset;
+    width: min-content;
+  }
+  .postcard .postcard__title {
+    font-size: 1.2rem;
+  }
+
+  .postcard .postcard__preview-txt{
+    font-size: 0.8rem;
+  }
 }
