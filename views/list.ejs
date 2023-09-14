@@ -2,7 +2,9 @@
 
 
 <section class="light">
-	<div class="h1 text-center text-dark" id="pageHeaderTitle"></div>
+	<div>
+		<input type="text" name="" id="">
+	</div>
 	<div class="container py-2">
 		<% details.forEach(function(user) { %>
 			<div class="postcard light blue">
@@ -16,9 +18,9 @@
 					</a>
 				<% } %>
 								<div class="postcard__text  t-dark">
-									<h1 class="postcard__title blue"><a href="#">
+									<!-- <h1 class="postcard__title blue"><a href="#">
 											<%= user.name %>
-										</a></h1>
+										</a></h1> -->
 									<div class="postcard__subtitle small">
 										<time datetime="2020-05-25 12:00:00">
 											<i class="fas fa-calendar-alt mr-2">
@@ -29,12 +31,12 @@
 									<div class="postcard__bar"></div>
 									<div class="postcard__preview-txt">LOCATION: <%= user.location %>
 									</div>
-									<div class="postcard__preview-txt"> SERVICE: <%= user.service %>
-									</div>
+									<!-- <div class="postcard__preview-txt"> SERVICE: <%= user.service %>
+									</div> -->
 									<ul class="postcard__tagbox">
-										<li class="tag__item"><i class="fas fa-tag mr-2"></i>
+										<!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>
 											<%= user.contact %>
-										</li>
+										</li> -->
 										<li class="tag__item"><i class="fas fa-clock mr-2"></i>
 											<%= user.for %>
 										</li>
