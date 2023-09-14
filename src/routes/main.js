@@ -49,7 +49,7 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
       const verify = jwt.verify(token, process.env.secretKey);
         const user = await Register.findById(verify._id);
       if (!user) {
-        return resp.status(401).send("User not found.");
+        return resp.status(401).send("User not found  you have to login or register.");
       }
       const { service, namehome, forValue, highlight, location,current_status, contact, latitude, longitude } = req.body;
       if (service) user.service = service;
@@ -59,12 +59,10 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
       if (location) user.location = location;
       if (contact) user.contact = contact;
       if (current_status) user.current_status = current_status;
-      // Store latitude and longitude in the user object
       if (latitude && longitude) {
         user.latitude = latitude;
         user.longitude = longitude;
       }
-  
       // Handle uploading the image 
       if (req.file) {
         cloudinary.uploader.upload(req.file.path, async (err, result) => {
@@ -72,16 +70,11 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
             console.error(err);
             return resp.status(500).send("Upload failed.");
           }
-          // Push the new image URL into the 'image' array
-          user.image.push({ url: result.secure_url });
-  
-          // Save the updated user data
-          await user.save();
-  
+          user.image.push({ url: result.secure_url });  
+          await user.save()
           resp.render("dashboard", { user });
         });
       } else {
-        // No new image uploaded, simply save the user's data
         await user.save();
         resp.render("dashboard", { user });
       }
@@ -99,7 +92,7 @@ routes.get('/logout', (req, resp) => {
     resp.redirect('/')
 })
 
-// logOut---------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// login---------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/login', (req, resp) => {
   resp.render('login')
 })
@@ -163,28 +156,24 @@ routes.post('/register', async (req, resp) => {
                 password: req.body.pass,
                 confirmpassword: req.body.repass,
             })
-
             const token = await userdata.generateAuthToken()
-            // console.log("generatet token is:", token);
-
             resp.cookie("jwt", token, {
                 expires: new Date(Date.now() + 10000000),
-                httpOnly: true
+                httpOnly: true,
+                sameSite: 'Strict'
             });
             const registered = await userdata.save()
-            resp.status(201).render('index')
-        } else {
+            resp.status(200).json({ success: true, message: 'register successful' });
+          } else {
             resp.send("pass not matching")
         }
-
     } catch (error) {
         resp.send(error)
         console.log("registerpage ka error post method");
     }
 })
 
-// login post
-
+// login post..................................................
 routes.post('/login', async (req, resp) => {
   const email = await req.body.email
   const password = await req.body.pass
@@ -192,15 +181,13 @@ routes.post('/login', async (req, resp) => {
       const useremail = await Register.findOne({ email: email })
       const ismatch = await bcrypt.compare(password, useremail.password)
       const token = await useremail.generateAuthToken()
-
-      
       if (ismatch) {
         resp.cookie("jwt", token, {
           expires: new Date(Date.now() + 30000000),
-          httpOnly: true
+          httpOnly: true,
+          sameSite: 'Strict'
       });
           resp.status(200).json({ success: true, message: 'Login successful' });
-
       } else {
         resp.status(401).json({ success: false, message: 'Login failed' });
       }
@@ -210,36 +197,23 @@ routes.post('/login', async (req, resp) => {
 
 })
 
-
-
-
 routes.post('/forgot-pass', async(req,resp)=>{
 const email= await req.body.email;
 const findinguser=await Register.findOne({email})
-// resp.send(findinguser)
-if (!email) {
-    resp.send("email not registerd")
+if (!findinguser) {
+    resp.status(401).json({ success: false, message: 'email not registerd... register first' });
     return;
 }
-// generating token
 const token = await findinguser.generateAuthToken()
-// console.log("forgot",token);
-
 // linkgenerating
 const link=`http://localhost:3000/reset-pass/${findinguser._id}/${token}`
 
-
 const transporter = nodemailer.createTransport({
     service: "gmail",
-    // port: 587,
-    // secure: false,
     auth: {
         user:process.env.semail,
         pass:process.env.epass
     },
-    // tls: {
-    //     ciphers:'SSLv3'
-    // }
   });
 let mailGenerater=new Mailgen({
     theme:"default",
@@ -248,7 +222,6 @@ let mailGenerater=new Mailgen({
         link:'https://mailgen.js/'
     }
 })
-
 let response={
     body:{
         name:findinguser.name,
@@ -260,9 +233,7 @@ let response={
         }
     },
     outro:"Looking forward to do more buissness"
-
 }
-
 let mail=mailGenerater.generate(response)
 // send mail with defined transport object
 const info = await transporter.sendMail({
@@ -272,9 +243,10 @@ const info = await transporter.sendMail({
     text: `this is your reset password link ${link}`, // plain text body
     html: mail, // html body
 }).then(()=>{
-    return resp.send("reset password link sended to your email")
+    return  resp.status(200).json({ success: true, message: 'reset pass send to your email' });
+
 }).catch(error =>{
-    return resp.send("error occure in sending email")
+  return resp.status(401).json({ success: fale, message: 'failed to send email' });
 })
 
 // console.log(link);
@@ -289,21 +261,23 @@ routes.get('/reset-pass/:_id/:token', async (req, resp) => {
 
 
 routes.post('/reset-pass/:_id/:token', async (req, resp) => {
-  const { _id, token } = req.params;
-  let { password, password2 } = req.body;
-
-  // Verify the token and update the password
-  const verify = jwt.verify(token, process.env.secretKey);
-
-  password = await bcrypt.hash(password, 12);
-  password2 = await bcrypt.hash(password2, 12);
-
-  // Update the password in the database
-  const updateResult = await Register.updateOne({ _id }, { $set: { password, confirmpassword: password2 } });
-  resp.json({ message: "Password successfully updated" });
-
+  let { password, password2, _id , token } = req.body;
+  try {
+    const verify = jwt.verify(token, process.env.secretKey);
+    password = await bcrypt.hash(password, 12);
+    password2 = await bcrypt.hash(password2, 12);
+    const updateResult = await Register.updateOne({ _id }, { $set: { password, confirmpassword: password2 } });
+    if (updateResult.modifiedCount === 1) {
+      resp.status(200).json({ status: true, message: "Password successfully updated" });
+    } else {
+      resp.status(404).json({ status: false, message: "Password update failed" });
+    }
+    
+  } catch (error) {
+    console.log(error);
+    resp.status(500).json({status:false, message: "An error occurred while updating the password" });
+  }
 });
-
 
 
 

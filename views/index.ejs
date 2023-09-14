@@ -16,7 +16,7 @@
   <!-- Unicons -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
   <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
-<!-- for alert -->
+  <!-- for alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 </head>
@@ -36,18 +36,20 @@
         </li>
       </ul>
 
-            
-            <% if (userName && userName.name) { %>
-              <div class="button_grp">
-                  <a  href="dashboard" class="button" id="loginbtn"><%= userName.name %></a>
-              </div>
-          <% } else { %>
+
+      <% if (userName && userName.name) { %>
         <div class="button_grp">
-          <button class="button" id="signupbtn">signup</button>
-          <button class="button" id="loginbtn">Login</button>
+          <a href="dashboard" class="button" id="loginbtn">
+            <%= userName.name %>
+          </a>
         </div>
+        <% } else { %>
+          <div class="button_grp">
+            <button class="button" id="signupbtn">signup</button>
+            <button class="button" id="loginbtn">Login</button>
+          </div>
           <% } %>
-          
+
 
 
 
@@ -77,40 +79,40 @@
 
   </div>
 
-    <!-- Home -->
-    <section class="home">
-        <div class="form_container">
-          <i class="uil uil-times form_close"></i>
-          
-          <!-- Login From -->
-            <div class="form signup_form" id="loginform">
-                
-              <form id="loginForm" action="/login" method="post" onsubmit="handleLoginFormSubmission(); return false;">
-                <h2>Login</h2>
-        
-                    <div class="input_box">
-                      <input type="email" placeholder="Enter your email" name="email" required />
-                      <i class="uil uil-envelope-alt email"></i>
-                    </div>
+  <!-- Home -->
+  <section class="home">
+    <div class="form_container">
+      <i class="uil uil-times form_close"></i>
 
-                    <div class="input_box">
-                      <input type="password" placeholder="password" name="pass" required />
-                      <i class="uil uil-lock password"></i>
-                      <i class="uil uil-eye-slash pw_hide"></i>
-                    </div>
-        
-                    <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
-                    <button class="button" type="submit">Login Now</button>
-        
-                    <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
-                  </form> 
+      <!-- Login From -->
+      <div class="form signup_form" id="loginform">
+
+        <form id="loginForm" action="/login" method="post" onsubmit="handleLoginFormSubmission(); return false;">
+          <h2>Login</h2>
+
+          <div class="input_box">
+            <input type="email" placeholder="Enter your email" name="email" required />
+            <i class="uil uil-envelope-alt email"></i>
+          </div>
+
+          <div class="input_box">
+            <input type="password" placeholder="password" name="pass" required />
+            <i class="uil uil-lock password"></i>
+            <i class="uil uil-eye-slash pw_hide"></i>
+          </div>
+
+          <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
+          <button class="button" type="submit">Login Now</button>
+
+          <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+        </form>
 
       </div>
 
 
       <!-- Signup From -->
       <div class="form signup_form">
-        <form action="/register" method="post">
+        <form id="registerForm" action="/register" method="post" onsubmit="registerhandle(); return false;">
           <h2>Signup</h2>
 
           <div class="input_box">
@@ -148,7 +150,7 @@
       <!-- forgot password  -->
       <div class="form signup_form" id="forgot">
 
-        <form action="/forgot-pass" method="post">
+        <form id="forgotPass" action="/forgot-pass" method="post" onsubmit="forgothandle(); return false">
           <h2>Forgot Password</h2>
 
           <div class="input_box">
@@ -156,7 +158,7 @@
             <i class="uil uil-envelope-alt email"></i>
           </div>
 
-          <button class="button">send</button>
+          <button class="button" type="submit">send</button>
 
         </form>
 
@@ -165,13 +167,13 @@
     </div>
   </section>
 
-    <!-- list start -->
-    <%- include('list.ejs') %>
+  <!-- list start -->
+  <%- include('list.ejs') %>
 
 
 
-<script>
-    const signbtn = document.querySelector("#signupbtn"),
+    <script>
+      const signbtn = document.querySelector("#signupbtn"),
         loginbtn = document.querySelector("#loginbtn"),
         home = document.querySelector(".home"),
         forgot = document.querySelector("#forgot"),
@@ -190,7 +192,7 @@
       loginlink.addEventListener("click", () => loginpage());
       forgotlink.addEventListener("click", () => forgetpage());
 
-      function forgetpage(){
+      function forgetpage() {
         loginform.style.display = "none";
         forgot.style.display = "block";
       }
@@ -200,17 +202,17 @@
         formContainer.classList.add("active");
         loginform.style.display = "none";
         forgot.style.display = "none";
-        
+
       }
 
       function loginpage() {
         home.classList.add("show")
         formContainer.classList.remove("active");
         loginform.style.display = "block";
-        
+
       }
 
-      
+
 
       formCloseBtn.addEventListener("click", () => {
         home.classList.remove("show")
@@ -235,41 +237,41 @@
 
         const form = document.getElementById('loginForm');
 
-// Get the email and password values from the form fields
-const email = form.querySelector('input[name="email"]').value;
-const password = form.querySelector('input[name="pass"]').value;
+        // Get the email and password values from the form fields
+        const email = form.querySelector('input[name="email"]').value;
+        const password = form.querySelector('input[name="pass"]').value;
 
 
-    fetch('/login', {
-        method: 'POST',
-        body: JSON.stringify({ email:email, pass: password }),
-        headers: {
+        fetch('/login', {
+          method: 'POST',
+          body: JSON.stringify({ email: email, pass: password }),
+          headers: {
             'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => { 
-        console.log(data.success);
-        if (data.success) { // Compare to the boolean value true
-            // Display a success pop-up
-            Swal.fire({
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.success);
+            if (data.success) { // Compare to the boolean value true
+              // Display a success pop-up
+              Swal.fire({
                 icon: 'success',
                 title: 'Success',
                 text: data.message
-            }).then(() => {
+              }).then(() => {
                 // Redirect or perform other actions after displaying the pop-up
                 window.location.href = '/';
-            });
-        } else {
-            // Display an error pop-up
-            Swal.fire({
+              });
+            } else {
+              // Display an error pop-up
+              Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: data.message
-            });
-        }
-    });
-}
+              });
+            }
+          });
+      }
 
       pwShowHide.forEach((icon) => {
         icon.addEventListener("click", () => {
@@ -284,7 +286,80 @@ const password = form.querySelector('input[name="pass"]').value;
         });
       });
 
+      // register handle
+      function registerhandle() {
 
+        const form = document.getElementById('registerForm');
+
+        // Get the email and password values from the form fields
+        const name = form.querySelector('input[name="name"]').value;
+        const email = form.querySelector('input[name="email"]').value;
+        const contact = form.querySelector('input[name="contact"]').value;
+        const password = form.querySelector('input[name="pass"]').value;
+        const repassword = form.querySelector('input[name="repass"]').value;
+
+        console.log("1");
+
+        fetch('/register', {
+          method: 'POST',
+          body: JSON.stringify({ name: name, email: email, contact: contact, pass: password, repass: repassword }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log("2");
+            if (data.success) {
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: data.message
+              }).then(() => {
+                window.location.href = '/';
+                console.log("3");
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message
+              });
+            }
+          });
+      }
+
+      function forgothandle() {
+        const form = document.getElementById('forgotPass');
+        const email = form.querySelector('input[name="email"]').value;
+        fetch('/forgot-pass', {
+          method: 'POST',
+          body: JSON.stringify({ email }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) { 
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: data.message
+              }).then(() => {
+                window.location.href = '/';
+              });
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message
+              });
+            }
+          });
+      }
 
     </script>
 </body>
