@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 const Register = require('../models/registers')
+const sendmsg = require('../models/sendmsg')
 const auth = require('../middleware/auth')
 const authdash = require('../middleware/authdash')
 const bcrypt = require('bcrypt')
@@ -158,7 +159,7 @@ routes.post('/register', async (req, resp) => {
             })
             const token = await userdata.generateAuthToken()
             resp.cookie("jwt", token, {
-                expires: new Date(Date.now() + 10000000),
+                expires: new Date(Date.now() + 604800000),
                 httpOnly: true,
                 sameSite: 'Strict'
             });
@@ -183,7 +184,7 @@ routes.post('/login', async (req, resp) => {
       const token = await useremail.generateAuthToken()
       if (ismatch) {
         resp.cookie("jwt", token, {
-          expires: new Date(Date.now() + 30000000),
+          expires: new Date(Date.now() + 604800000),
           httpOnly: true,
           sameSite: 'Strict'
       });
@@ -207,7 +208,6 @@ if (!findinguser) {
 const token = await findinguser.generateAuthToken()
 // linkgenerating
 const link=`http://localhost:3000/reset-pass/${findinguser._id}/${token}`
-
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -279,6 +279,21 @@ routes.post('/reset-pass/:_id/:token', async (req, resp) => {
   }
 });
 
+// send mssage
+routes.post('/landing', async (req, resp) => {
+  try {
+    const { name, email, message } = req.body;
+    const messagedetail = await sendmsg.create({
+      name,
+      email,
+      message
+    });
+    resp.status(200).json({ success: true, message: "Message sent successfully" });
+  } catch (error) {
+    console.error(error);
+    resp.status(500).json({ success: false, message: "An error occurred while sending the message" });
+  }
+});
 
 
 
