@@ -37,8 +37,11 @@
 										<!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>
 											<%= user.contact %>
 										</li> -->
-										<li class="tag__item"><i class="fas fa-clock mr-2"></i>
+										<li class="tag__item">
 											<%= user.for %>
+										</li>
+										<li class="tag__item">
+											<%= user.service %>
 										</li>
 										<li class="tag__item play blue">
 											<a href="/user-details?userId=<%= user._id %>"><i class="fas fa-play mr-2"></i>see more....</a>
@@ -47,7 +50,6 @@
 								</div>
 			</div>
 			<% }); %>
-				<!-- <article class="postcard light red">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />	
 			</a>

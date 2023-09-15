@@ -30,6 +30,7 @@
     <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/dash.css" />
 
@@ -72,18 +73,21 @@
         </div>
 
         <!-- Iterate through user images and display with delete buttons -->
+        <div class="userimgcontainer">
         <% for (let index=0; index < user.image.length; index++) { %>
-          <img src="<%= user.image[index].url %>">
-          <button data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">Delete</button>
+          <div class="iiimg">
+            <img class="Userhomeimg" src="<%= user.image[index].url %>">
+            <button class="delImgBtn" data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
           <% } %>
-            <% } else { %>
+          </div>
+          <% } else { %>
               <p>User data is not available.</p>
               <% } %>
+
                 <form id="myForm" action="/dashboard" method="post" enctype="multipart/form-data">
-                  <!-- <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Enter png Icon (Optional)</label>
-                    <input type="file" id="photo" name="image" /><br /><br />
-                  </div> -->
 
                   <div class="form">
 
