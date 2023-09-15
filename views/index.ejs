@@ -345,10 +345,10 @@
       }
       
       function forgothandle() {
+        const form = document.getElementById('forgotPass');
         const resetBtnText =  document.querySelector('#resetBtnText')
         resetBtnText.innerHTML = "Processing..."
         resetBtnText.disabled = true;
-        const form = document.getElementById('forgotPass');
         const email = form.querySelector('input[name="email"]').value;
         fetch('/forgot-pass', {
           method: 'POST',

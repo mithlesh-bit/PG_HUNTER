@@ -197,3 +197,34 @@ a{
    ::-ms-input-placeholder { /* Microsoft Edge */
     color: red;
    }
+
+.userimgcontainer{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.Userhomeimg{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.iiimg{
+    position: relative;
+}
+
+.delImgBtn{
+    position: absolute;
+    right: 1rem;
+    bottom: 0.5rem;
+    opacity: 0;
+    color: white;
+    transition: opacity 0.3s;
+}
+
+.iiimg:hover .delImgBtn{
+    opacity: 1;
+}
+
