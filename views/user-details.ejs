@@ -151,33 +151,42 @@
                                 </span>
                             </li>
                             <li class="flex border-b py-2">
-                                <span class="font-bold w-24">Email:</span>
+                                <span class="font-bold w-24">Service Type:</span>
                                 <span class="text-gray-700">
-                                    <%= userDetails.email %>
+                                    <%= userDetails.service %>
                                 </span>
                             </li>
                             <li class="flex border-b py-2">
                                 <span class="font-bold w-24">Location:</span>
-                                <span class="text-gray-700">
-                                    <%= userDetails.location %>
-                                </span>
+                                <span class="text-gray-700"><%= userDetails.location %></span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Landmark:</span>
+                                <span class="text-gray-700">near -----</span>
                             </li>
                             <li class="flex border-b py-2">
                                 <span class="font-bold w-24">House number:</span>
                                 <span class="text-gray-700"><%= userDetails.contact %></span>
                             </li>
                             <li class="flex items-center border-b py-2 space-x-2">
-                                <span class="font-bold w-24">Ward number:</span>
-                                <span class="text-gray-700">04</span>
+                                <span class="font-bold w-24">Available For:</span>
+                                <span class="text-gray-700"><%= userDetails.for %></span>
                             </li>
                             <li class="flex items-center border-b py-2 space-x-2">
-                                <span class="font-bold w-24">Room available:</span>
+                                <span class="font-bold w-24">number of rooms:</span>
                                 <span class="text-gray-700">04</span>
                             </li>
-                            <li class="flex items-center border-b py-2 space-x-2">
-                                <span class="font-bold w-24">Extra facilities:</span>
-                                <span class="text-gray-700">Table - chair</span>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Current status:</span>
+                                <span class="text-gray-700 hover:select-all">
+                                    <%= userDetails.current_status %>
+                                </span>
                             </li>
+                            <li class="flex items-center border-b py-2 space-x-2">
+                                <span class="font-bold w-24">Highlight:</span>
+                                <span class="text-gray-700"><%= userDetails.highlight %></span>
+                            </li>
+
                         </ul>
                     </div>
 

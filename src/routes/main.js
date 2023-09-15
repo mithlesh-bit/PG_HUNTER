@@ -52,14 +52,17 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
       if (!user) {
         return resp.status(401).send("User not found  you have to login or register.");
       }
-      const { service, namehome, forValue, highlight, location,current_status, contact, latitude, longitude } = req.body;
+      const { service, namehome, forValue, highlight, location,current_status, contact, latitude, longitude, numroom, landmark } = req.body;
       if (service) user.service = service;
       if (namehome) user.namehome = namehome;
       if (forValue) user.for = forValue;
       if (highlight) user.highlight = highlight;
       if (location) user.location = location;
       if (contact) user.contact = contact;
+      if (landmark) user.landmark = landmark;
+      if (numroom) user.numroom = numroom;
       if (current_status) user.current_status = current_status;
+
       if (latitude && longitude) {
         user.latitude = latitude;
         user.longitude = longitude;
@@ -159,7 +162,7 @@ routes.post('/register', async (req, resp) => {
             })
             const token = await userdata.generateAuthToken()
             resp.cookie("jwt", token, {
-                expires: new Date(Date.now() + 604800000),
+                expires: new Date(Date.now() +  5259600000),
                 httpOnly: true,
                 sameSite: 'Strict'
             });
@@ -184,7 +187,7 @@ routes.post('/login', async (req, resp) => {
       const token = await useremail.generateAuthToken()
       if (ismatch) {
         resp.cookie("jwt", token, {
-          expires: new Date(Date.now() + 604800000),
+          expires: new Date(Date.now() +  5259600000),
           httpOnly: true,
           sameSite: 'Strict'
       });
@@ -296,6 +299,9 @@ routes.post('/landing', async (req, resp) => {
 });
 
 
-
+// 404 page--------------------------
+routes.get('*', (req, res) => {
+  res.status(404).render('404.ejs');
+});
 
 module.exports = routes

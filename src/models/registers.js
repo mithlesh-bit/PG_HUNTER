@@ -36,6 +36,8 @@ const registerSchema = new mongoose.Schema({
     for: String,
     highlight: String,
     location: String,
+    numroom:Number,
+    landmark:String,
     contact: {
         type: Number,
        unique:true
