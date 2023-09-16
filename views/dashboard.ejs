@@ -28,7 +28,7 @@
     <!-- for alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+      href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/style.css" />
@@ -58,127 +58,134 @@
 
       <% if (user ) { %>
         <div class="bg-secondary d-lg-inline-block py-3 px-1 px-sm-6 mb-1-9 rounded-sm p-2 cards">
-         
-        <div class="flex justify-between ">
-          <h3 class="h2 text-black mb-0"><%= user.name %></h3>
-          <div>
-            <p>Email: <%= user.email %>
-            </p>
-            <p>Contact: <%= user.contact %>
-            </p>
+
+          <div class="flex justify-between ">
+            <h3 class="h2 text-black mb-0">
+              <%= user.name %>
+            </h3>
+            <div>
+              <p>Email: <%= user.email %>
+              </p>
+              <p>Contact: <%= user.contact %>
+              </p>
+
+            </div>
 
           </div>
-
-        </div>
         </div>
 
         <!-- Iterate through user images and display with delete buttons -->
         <div class="userimgcontainer">
-        <% for (let index=0; index < user.image.length; index++) { %>
-          <div class="iiimg">
-            <img class="Userhomeimg" src="<%= user.image[index].url %>">
-            <button class="delImgBtn" data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
+          <% for (let index=0; index < user.image.length; index++) { %>
+            <div class="iiimg">
+              <img class="Userhomeimg" src="<%= user.image[index].url %>">
+              <button class="delImgBtn" data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+            <% } %>
+        </div>
+        <% } else { %>
+          <p>User data is not available.</p>
           <% } %>
-          </div>
-          <% } else { %>
-              <p>User data is not available.</p>
-              <% } %>
 
-                <form id="myForm" action="/dashboard" method="post" enctype="multipart/form-data">
+          <% if (user ) { %>
 
-                  <div class="form">
 
-                    <div class="mb-3 form_item">
-                      <label for="namehome" class="form-label">Name</label>
-                      <input type="text" class="form-control" id="namehome" placeholder=<%= user.name%> name="namehome" />
-                    </div>
+            <form id="myForm" action="/dashboard" method="post" enctype="multipart/form-data">
 
-                    <div class="form_item">
-                      <label for="service"  class="form-label">Room Type</label>
-                      <select name="service" aria-placeholder=<%= user.service%> class="form-control"  id="service">
-                        <option value="" disabled selected >Choose a Room Type</option>
-                        <option value="PG">PG</option>
-                        <option value="FLAT">Flat</option>
-                        <option value="HOSTEL">Hostel</option>
-                      </select>
-                    </div>
-  
-  
-                    <div class="mb-3 form_item">
-                      <label for="forValue" class="form-label"> Available For</label>
-                      <select name="forValue" class="form-control"  id="forValue" >
-                        <option value="" disabled selected >Choose a </option>
-                        <option value="BOY">Boy</option>
-                        <option value="GIRL">Girl</option>
-                        <option value="FAMILY">Family</option>
-                      </select>
-                    </div>
+              <div class="form">
 
-                    <div class="mb-3 form_item">
-                      <label for="current_status" class="form-label">current status</label>
-                      <select name="forValue" class="form-control"  id="current_status" >
-                        <option value="" disabled selected >Choose Availability </option>
-                        <option value="AVAILABLE">Available</option>
-                        <option value="UNAVAILABLE">Unavailablel</option>
-                      </select>
-                    </div>
+                <div class="mb-3 form_item">
+                  <label for="namehome" class="form-label">Name your home</label>
+                  <input type="text" class="form-control" id="namehome" name="namehome" placeholder="<%=user.namehome%>" />
+                </div>
+
+                <div class="form_item">
+                  <label for="service" class="form-label">Room Type</label>
+                  <select name="service" aria-placeholder=<%=user.service%> class="form-control" id="service">
+                    <option value="" disabled selected>Choose a Room Type</option>
+                    <option value="PG">PG</option>
+                    <option value="FLAT">Flat</option>
+                    <option value="HOSTEL">Hostel</option>
+                  </select>
+                </div>
+
+
+                <div class="mb-3 form_item">
+                  <label for="forValue" class="form-label"> Available For</label>
+                  <select name="forValue" class="form-control" id="forValue">
+                    <option value="" disabled selected>Choose a </option>
+                    <option value="BOY">Boy</option>
+                    <option value="GIRL">Girl</option>
+                    <option value="FAMILY">Family</option>
+                  </select>
+                </div>
+
+                <div class="mb-3 form_item">
+                  <label for="current_status" class="form-label">current status</label>
+                  <select name="current_status" class="form-control" id="current_status">
+                    <option value="" disabled selected>Choose Availability </option>
+                    <option value="AVAILABLE">Available</option>
+                    <option value="UNAVAILABLE">Unavailablel</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-3 form_item">
+                <label for="highlight" class="form-label">Highlight</label>
+                <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3"
+                  placeholder="<%= user.status %>"></textarea>
+              </div>
+
+              <div class="form">
+                <div class="mb-3 form_item">
+                  <label for="location" class="form-label">Location</label>
+                  <div class="flex">
+                    <input type="text" placeholder="<%= user.location%>" class="form-control" id="location"
+                      name="location" />
+                    <button type="button" onclick="getLocation()">Get Current Location</button>
                   </div>
-                  <div class="mb-3 form_item">
-                    <label for="highlight" class="form-label">Highlight</label>
-                    <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3" placeholder="<%= user.status %>"></textarea>
-                  </div>
-                  
-                  <div class="form">  
-                    <div class="mb-3 form_item">
-                      <label for="location" class="form-label">Location</label>
-                      <div class="flex">
-                        <input type="text" placeholder="<%= user.location%>" class="form-control" id="location" name="location" />
-                        <button type="button"  onclick="getLocation()">Get Current Location</button>
-                      </div>
-                    </div>
-  
-                    
-  
-                    <div class="mb-3 form_item">
-                      <label for="contact" class="form-label">Contact</label>
-                      <input type="text" class="form-control" id="contact" name="contact" placeholder=<%= user.contact%> />
-                    </div>
-                  </div>
+                </div>
 
-                  <!-- <div class="mb-3 form_item">
+
+
+                <div class="mb-3 form_item">
+                  <label for="contact" class="form-label">Contact</label>
+                  <input type="text" class="form-control" id="contact" name="contact" placeholder=<%=user.contact%> />
+                </div>
+              </div>
+
+              <!-- <div class="mb-3 form_item">
                     <label for="contact" class="form-label">number of rooms</label>
                     <input type="num" class="form-control" id="numroom" name="numroom" placeholder="04" />
                   </div>
                 </div> -->
-                  
-
-                  <!-- Adding hidden input fields for latitude and longitude -->
-                  <input type="hidden" id="latitude" name="latitude" />
-                  <input type="hidden" id="longitude" name="longitude" />
 
 
-                  <div class="flex justify-between">
-                    <div>
-                      <label for="exampleInputPassword1" class="form-label">Enter image  (Optional)</label>
-                      <input type="file" id="photo" name="image" /><br /><br />
-                    </div>
+              <!-- Adding hidden input fields for latitude and longitude -->
+              <input type="hidden" id="latitude" name="latitude" />
+              <input type="hidden" id="longitude" name="longitude" />
 
-                  <div class="flex ">
-                    <button type="submit" class="button update text-black">Update</button>
-                    <!-- <p>Not a member? <a href="#">Signup now</a></p> -->
-                    <a href="/logout" class="logbutton ml-2 justify-center items-center ">
-                      Logout
-                    </a> 
 
-                  </div>
-                    
-                  </form>
-                  <% } %>
+              <div class="flex justify-between">
+                <div>
+                  <label for="exampleInputPassword1" class="form-label">Enter image (Optional)</label>
+                  <input type="file" id="photo" name="image" /><br /><br />
+                </div>
 
-                  </div>
+                <div class="flex ">
+                  <button type="submit" class="button update text-black">Update</button>
+                  <!-- <p>Not a member? <a href="#">Signup now</a></p> -->
+                  <a href="/logout" class="logbutton ml-2 justify-center items-center ">
+                    Logout
+                  </a>
+
+                </div>
+
+            </form>
+            <% } %>
+
+    </div>
     </div>
   </section>
 
@@ -197,11 +204,9 @@
 
       // Make an API request to OpenCage Geocoding using fetch
       try {
-        const apiKey = '39a5aeb3daa64655b405c79ad98952ba'; // Replace with your API key
+        const apiKey = "39a5aeb3daa64655b405c79ad98952ba" 
         const apiUrl = `https://api.opencagedata.com/geocode/v1/json?key=${apiKey}&q=${latitude},${longitude}`;
-
         const response = await fetch(apiUrl);
-
         if (response.ok) {
           const data = await response.json();
           if (data.results.length > 0) {
@@ -219,6 +224,7 @@
       } catch (error) {
         console.error('Error fetching address:', error);
       }
+
     }
 
   </script>

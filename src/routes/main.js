@@ -52,7 +52,8 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
       if (!user) {
         return resp.status(401).send("User not found  you have to login or register.");
       }
-      const { service, namehome, forValue, highlight, location,current_status, contact, latitude, longitude, numroom, landmark } = req.body;
+      const {  name, service, namehome, forValue, highlight, location,current_status, contact, latitude, longitude, numroom, landmark } = req.body;
+      if (name) user.name = name;
       if (service) user.service = service;
       if (namehome) user.namehome = namehome;
       if (forValue) user.for = forValue;

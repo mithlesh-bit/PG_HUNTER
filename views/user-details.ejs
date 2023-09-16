@@ -138,9 +138,9 @@
                         <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
                         <ul class="mt-2 text-gray-700">
                             <li class="flex border-y py-2">
-                                <span class="font-bold w-24">Full name:</span>
+                                <span class="font-bold w-24">House Name:</span>
                                 <span class="text-gray-700">
-                                    <%= userDetails.name %>
+                                    <%= userDetails.namehome %>
                                 </span>
                             </li>
 
@@ -201,11 +201,26 @@
                     <img class="rounded-lg" src="/assets/3.jpg" alt="img">
                     <img class="rounded-lg" src="/assets/2.jpg" alt="img"> -->
 
+
+                    <% details.forEach(function(user) { %>
+                        <div class="postcard light blue">
+                            <% if (user.image && user.image.length > 0) { %>
+                                <a class="postcard__img_link" href="#">
+                                <img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
+                            </a>
+                            <% } else { %>
+                                <a class="postcard__img_link" href="#">
+                                    <img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
+                                </a>
+                            <% } %>
+
                 <div class="slideshow-container h-full w-full">
+                    <% details.forEach(function(user) { %>
+                        <% if (user.image && user.image.length > 0) { %>
                     <div class="mySlides1 w-full h-full">
                         <img src="/assets/1.jpg" class="object-cover w-full h-full rounded-lg">
                     </div>
-
+                    <% } else { %>
                     <div class="mySlides1 w-full h-full">
                         <img src="/assets/2.jpg" class="object-cover w-full h-full rounded-lg">
                     </div>
