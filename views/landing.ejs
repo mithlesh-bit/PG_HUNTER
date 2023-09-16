@@ -19,6 +19,7 @@
       href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css"
     />
     <title>Landing Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   </head>
   <body class="text-gray-800 antialiased">
     <nav
@@ -69,13 +70,13 @@
             
             </li>
             <li class="flex items-center">
-              <button
+              <a href="/"
                 class="bg-white text-gray-800 active:bg-gray-100 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
                 type="button"
                 style="transition: all 0.15s ease 0s;"
               >
                 <i class="fas fa-arrow-alt-circle-down"></i> Go to home
-              </button>
+            </a>
             </li>
           </ul>
         </div>
@@ -352,7 +353,7 @@
               <div class="px-6">
                 <img
                   alt="Jitesh Ayam"
-                  src="/assets/img/team-1-800x800.jpg"
+                  src="/assets/img/jitesh.jpeg"
                   class="shadow-lg rounded-full max-w-full mx-auto"
                   style="max-width: 120px;"
                 />
@@ -386,7 +387,7 @@
               <div class="px-6">
                 <img
                   alt="..."
-                  src="/assets/img/team-2-800x800.jpg"
+                  src="/assets/img/mithlesh.jpeg"
                   class="shadow-lg rounded-full max-w-full mx-auto"
                   style="max-width: 120px;"
                 />
@@ -454,7 +455,7 @@
               <div class="px-6">
                 <img
                   alt="..."
-                  src="/assets/img/team-4-470x470.png"
+                  src="/assets/img/dinesh.jpeg"
                   class="shadow-lg rounded-full max-w-full mx-auto"
                   style="max-width: 120px;"
                 />
@@ -564,6 +565,7 @@
               <div
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300"
               >
+              <form id="messageForm" action="/landing" method="post" onsubmit="messagehandle(); return false">
                 <div class="flex-auto p-5 lg:p-10">
                   <h4 class="text-2xl font-semibold">Any suggestion !</h4>
                   <p class="leading-relaxed mt-1 mb-4 text-gray-600">
@@ -576,6 +578,7 @@
                       >Full Name</label
                     ><input
                       type="text"
+                      name="name"
                       class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Full Name"
                       style="transition: all 0.15s ease 0s;"
@@ -588,6 +591,7 @@
                       >Email</label
                     ><input
                       type="email"
+                      name="email"
                       class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Email"
                       style="transition: all 0.15s ease 0s;"
@@ -600,6 +604,7 @@
                       >Message</label
                     ><textarea
                       rows="4"
+                      name="message"
                       cols="80"
                       class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Type a message..."
@@ -608,13 +613,14 @@
                   <div class="text-center mt-6">
                     <button
                       class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                      type="button"
+                      type="submit"
                       style="transition: all 0.15s ease 0s;"
                     >
                       Send Message
                     </button>
                   </div>
                 </div>
+              </form>
               </div>
             </div>
           </div>
@@ -772,5 +778,51 @@
       document.getElementById(collapseID).classList.toggle("hidden");
       document.getElementById(collapseID).classList.toggle("block");
     }
+
+
+    function messagehandle(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  const form = document.getElementById('messageForm');
+
+  // Get the email, message, and name values from the form fields
+  const email = form.querySelector('input[name="email"]').value;
+  const message = form.querySelector('textarea[name="message"]').value;
+  const name = form.querySelector('input[name="name"]').value;
+
+  fetch('/landing', {
+    method: 'POST',
+    body: JSON.stringify({ email, message, name }), // Updated the field names
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.success);
+      if (data.success) { // Compare to the boolean value true
+        // Display a success pop-up
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: data.message
+        }).then(() => {
+          // Redirect or perform other actions after displaying the pop-up
+          window.location.href = '/landing'; // Correct the redirection URL
+        });
+      } else {
+        // Display an error pop-up
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: data.message
+        });
+      }
+    });
+}
+
+const form = document.getElementById('messageForm');
+form.addEventListener('submit', messagehandle); // Attach the event listener
+
   </script>
 </html>

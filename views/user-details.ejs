@@ -138,9 +138,9 @@
                         <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
                         <ul class="mt-2 text-gray-700">
                             <li class="flex border-y py-2">
-                                <span class="font-bold w-24">Full name:</span>
+                                <span class="font-bold w-24">House Name:</span>
                                 <span class="text-gray-700">
-                                    <%= userDetails.name %>
+                                    <%= userDetails.namehome %>
                                 </span>
                             </li>
 
@@ -151,33 +151,42 @@
                                 </span>
                             </li>
                             <li class="flex border-b py-2">
-                                <span class="font-bold w-24">Email:</span>
+                                <span class="font-bold w-24">Service Type:</span>
                                 <span class="text-gray-700">
-                                    <%= userDetails.email %>
+                                    <%= userDetails.service %>
                                 </span>
                             </li>
                             <li class="flex border-b py-2">
                                 <span class="font-bold w-24">Location:</span>
-                                <span class="text-gray-700">
-                                    <%= userDetails.location %>
-                                </span>
+                                <span class="text-gray-700"><%= userDetails.location %></span>
+                            </li>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Landmark:</span>
+                                <span class="text-gray-700">near -----</span>
                             </li>
                             <li class="flex border-b py-2">
                                 <span class="font-bold w-24">House number:</span>
-                                <span class="text-gray-700">11223344</span>
+                                <span class="text-gray-700"><%= userDetails.contact %></span>
                             </li>
                             <li class="flex items-center border-b py-2 space-x-2">
-                                <span class="font-bold w-24">Ward number:</span>
+                                <span class="font-bold w-24">Available For:</span>
+                                <span class="text-gray-700"><%= userDetails.for %></span>
+                            </li>
+                            <li class="flex items-center border-b py-2 space-x-2">
+                                <span class="font-bold w-24">number of rooms:</span>
                                 <span class="text-gray-700">04</span>
                             </li>
-                            <li class="flex items-center border-b py-2 space-x-2">
-                                <span class="font-bold w-24">Room available:</span>
-                                <span class="text-gray-700">04</span>
+                            <li class="flex border-b py-2">
+                                <span class="font-bold w-24">Current status:</span>
+                                <span class="text-gray-700 hover:select-all">
+                                    <%= userDetails.current_status %>
+                                </span>
                             </li>
                             <li class="flex items-center border-b py-2 space-x-2">
-                                <span class="font-bold w-24">Extra facilities:</span>
-                                <span class="text-gray-700">Table - chair</span>
+                                <span class="font-bold w-24">Highlight:</span>
+                                <span class="text-gray-700"><%= userDetails.highlight %></span>
                             </li>
+
                         </ul>
                     </div>
 
@@ -192,11 +201,26 @@
                     <img class="rounded-lg" src="/assets/3.jpg" alt="img">
                     <img class="rounded-lg" src="/assets/2.jpg" alt="img"> -->
 
+
+                    <% details.forEach(function(user) { %>
+                        <div class="postcard light blue">
+                            <% if (user.image && user.image.length > 0) { %>
+                                <a class="postcard__img_link" href="#">
+                                <img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
+                            </a>
+                            <% } else { %>
+                                <a class="postcard__img_link" href="#">
+                                    <img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
+                                </a>
+                            <% } %>
+
                 <div class="slideshow-container h-full w-full">
+                    <% details.forEach(function(user) { %>
+                        <% if (user.image && user.image.length > 0) { %>
                     <div class="mySlides1 w-full h-full">
                         <img src="/assets/1.jpg" class="object-cover w-full h-full rounded-lg">
                     </div>
-
+                    <% } else { %>
                     <div class="mySlides1 w-full h-full">
                         <img src="/assets/2.jpg" class="object-cover w-full h-full rounded-lg">
                     </div>
