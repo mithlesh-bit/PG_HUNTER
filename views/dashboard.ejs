@@ -104,10 +104,10 @@
           </div>
         </div>
         <div class="w-full h-[250px]">
-          <img src="/assets/bg.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+          <img src="<%= user.image[0].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
         </div>
         <div class="flex flex-col items-center -mt-20">
-          <img src="/assets/download.jpg" class="w-40 border-4 border-white rounded-full">
+          <img src="<%= user.image[1].url %>" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
           <div class="flex items-center space-x-2 mt-2">
             <p class="text-2xl">
               <%= user.name %>
@@ -141,14 +141,14 @@
         </div>
       </div>
 
-      <div class=" flex h-1/2">
+      <div class=" flex h-1/2 flex-wrap">
 
-        <div class="my-4 flex-1   flex-row 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4 ">
+        <div class="my-4 flex-1   flex-row 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4 sm:w-full">
           <div class=" flex  flex-col ">
             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
               <div class="flex justify-between">
                 <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
-                <button id="editProfile" onclick="editProfile()" >Edit Profile</button>
+                <button id="editProfile" onclick="editProfile()" ><i class="fa-solid fa-pen"></i></button>
 
               </div>
               <ul class="mt-2 text-gray-700">
@@ -177,30 +177,31 @@
                     <%= user.location %>
                   </span>
                 </li>
-                <li class="flex border-b py-2">
-                  <span class="font-bold w-24">House number:</span>
-                  <span class="text-gray-700">11223344</span>
-                </li>
                 <li class="flex items-center border-b py-2 space-x-2">
-                  <span class="font-bold w-24">Ward number:</span>
-                  <span class="text-gray-700">04</span>
+                  <span class="font-bold w-24">Room Type</span>
+                  <span class="text-gray-700"><%=user.for%></span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                   <span class="font-bold w-24">Room available:</span>
-                  <span class="text-gray-700">04</span>
+                  <span class="text-gray-700"><%=user.numroom%></span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                   <span class="font-bold w-24">Extra facilities:</span>
-                  <span class="text-gray-700">Table - chair</span>
+                  <span class="text-gray-700"><%=user.highlight%></span>
                 </li>
               </ul>
+              <div class="flex justify-end mt-4">
+                <a href="/logout" class="logbutton right-0 w-24 justify-center items-center">
+                  Logout
+                </a>
+              </div>
             </div>
 
           </div>
         </div>
 
 
-        <div class="my-4 h-96 flex-1 ml-1  flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3">
+        <div class="my-4 h-96 flex-1 ml-1  flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3 ">
 
           <!-- class=" flex  flex-col scroll-smooth overflow-x-auto w-full h-1/2  items-center rounded  bg-slate-800 rounded-lg drop-shadow-2xl ">
                   <img class="rounded-lg cover" src="/assets/1.jpg" alt="img">
@@ -254,10 +255,15 @@
           <% if (user ) { %>
           <form  action="/dashboard" method="post" enctype="multipart/form-data">
 
-            <div class="form">
+            <div class="form mt-4">
 
               <div class="mb-3 form_item">
-                <label for="namehome" class="form-label">Name your home</label>
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="<%=user.name%>" />
+              </div>
+
+              <div class="mb-3 form_item">
+                <label for="namehome" class="form-label">House Name</label>
                 <input type="text" class="form-control" id="namehome" name="namehome" placeholder="<%=user.namehome%>" />
               </div>
 
@@ -269,6 +275,11 @@
                   <option value="FLAT">Flat</option>
                   <option value="HOSTEL">Hostel</option>
                 </select>
+              </div>
+
+              <div class="mb-3 form_item">
+                <label for="numroom" class="form-label">No. of Room</label>
+                <input type="text" class="form-control" id="numroom" name="numroom" placeholder=<%=user.numroom%> >
               </div>
 
 
@@ -290,7 +301,14 @@
                   <option value="UNAVAILABLE">Unavailablel</option>
                 </select>
               </div>
+
+              <div class="mb-3 form_item">
+                <label for="contact" class="form-label">Contact</label>
+                <input type="text" class="form-control" id="contact" name="contact" placeholder=<%=user.contact%> >
+              </div>
             </div>
+
+
             <div class="mb-3 form_item">
               <label for="highlight" class="form-label">Highlight</label>
               <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3"
@@ -303,16 +321,19 @@
                 <div class="flex">
                   <input type="text" placeholder="<%= user.location%>" class="form-control" id="location"
                     name="location" />
-                  <button type="button" onclick="getLocation()">Get Current Location</button>
+                  <button type="button" onclick="getLocation()"><i class="fa-solid fa-location-dot ml-2"></i></button>
                 </div>
               </div>
 
 
 
               <div class="mb-3 form_item">
-                <label for="contact" class="form-label">Contact</label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder=<%=user.contact%> />
+                <label for="landmark" class="form-label">Landmark</label>
+                <input type="text" class="form-control" id="landmark" name="landmark" placeholder=<%=user.landmark%> eg:playing-Ground>
               </div>
+
+
+              
             </div>
 
             <!-- <div class="mb-3 form_item">
@@ -327,7 +348,7 @@
             <input type="hidden" id="longitude" name="longitude" />
 
 
-            <div class="flex justify-between">
+            <div class="flex justify-between flex-wrap">
               <div>
                 <label for="exampleInputPassword1" class="form-label">Enter image (Optional)</label>
                 <input type="file" id="photo" name="image" /><br /><br />
@@ -336,9 +357,7 @@
               <div class="flex ">
                 <button type="submit" class="button update text-black">Update</button>
                 <!-- <p>Not a member? <a href="#">Signup now</a></p> -->
-                <a href="/logout" class="logbutton ml-2 justify-center items-center ">
-                  Logout
-                </a>
+                
 
               </div>
 
@@ -438,6 +457,7 @@
     function editProfile() {
       const myForm = document.querySelector('#myForm')
       myForm .style.display = "block";
+      myForm.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     }
 </script>
 </body>

@@ -67,6 +67,7 @@ body{
   width: 100%;
   background-size: cover;
   background-position: center;
+  background-color: #f3f5f7;
 }
 .home::before {
   content: "";
@@ -114,6 +115,7 @@ body{
 }
 .form_container.active .login_form {
   display: none;
+  position: relative;
 }
 .form_close {
   position: absolute;

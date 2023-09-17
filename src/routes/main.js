@@ -12,28 +12,35 @@ const Mailgen = require("mailgen");
 const upload=require('../multer')
 const cloudinary = require("../middleware/utils/cloudinary");
 
+
 // image delete
 routes.delete('/deleteImage/:imageId', async (req, res) => {
-    const { imageId } = req.params;
-    const token = req.cookies.jwt;
-      const verify = jwt.verify(token, process.env.secretKey);
-    try {
-      const user = await Register.findById(verify._id);
-      if (!user) {
-        return res.status(404).send('User not found');
-      }
-      const imageIndex = user.image.findIndex((img) => img._id.toString() === imageId);
-      if (imageIndex === -1) {
-        return res.status(404).send('Image not found');
-      }
-        user.image.splice(imageIndex, 1);
-        await user.save();
-      res.status(204).send();
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Internal Server Error');
+  const { imageId } = req.params;
+  const token = req.cookies.jwt;
+  const verify = jwt.verify(token, process.env.secretKey);
+
+  try {
+    const user = await Register.findById(verify._id);
+    if (!user) {
+      return res.status(404).send('User not found');
     }
-  });
+
+    const imageIndex = user.image.findIndex((img) => img._id.toString() === imageId);
+    if (imageIndex === -1) {
+      return res.status(404).send('Image not found');
+    }
+
+    // Remove the image URL from the user's profile
+    user.image.splice(imageIndex, 1);
+    await user.save();
+
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 
 // dashboard--------------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -68,24 +75,27 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
         user.latitude = latitude;
         user.longitude = longitude;
       }
-      // Handle uploading the image 
-      if (req.file) {
+       // Handle uploading the image
+       if (req.file) {
         cloudinary.uploader.upload(req.file.path, async (err, result) => {
           if (err) {
             console.error(err);
-            return resp.status(500).send("Upload failed.");
+            return resp.status(500).send('Upload failed.');
           }
-          user.image.push({ url: result.secure_url });  
-          await user.save()
-          resp.render("dashboard", { user });
+  
+          // Add the new image URL to the user's profile
+          user.image.push({ url: result.secure_url });
+          await user.save();
+          resp.render('dashboard', { user });
         });
       } else {
+        // No image was uploaded, so don't modify the user's image array
         await user.save();
-        resp.render("dashboard", { user });
+        resp.render('dashboard', { user });
       }
     } catch (error) {
       console.error(error);
-      resp.status(401).send("Login timeout. Please login.");
+      resp.status(401).send('Login timeout. Please login.');
     }
   });
   
