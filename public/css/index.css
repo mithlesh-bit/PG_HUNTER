@@ -222,3 +222,102 @@ body{
 #forgot{
   display: none;
 }
+
+.mob__bar{
+  display: none;
+}
+
+.baaar, .close_baaar{
+  display: none;
+  color: #ffffff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mobile-nav{
+  display: none;
+  width: 300px;
+  height: 100vh;
+  position: absolute;
+  background-color: #1f1f1f;
+  right: -23px;
+  top: 80px;
+}
+
+
+
+.mob_nav_item{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: white;
+}
+
+.mob_nav_item .mob_nav_link{
+  text-align: right;
+  margin-right: 2rem;
+  padding: 0.6rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.mob_nav_item .mob_nav_link.red{
+  color: rgb(222, 58, 58);
+  transition: all 0.1s;
+}
+.mob_nav_item .mob_nav_link.red:hover{
+  background-color: rgb(222, 58, 58);
+  color: white;
+}
+
+.mob_nav_link:hover{
+  background-color: white;
+  margin-left: 1rem;
+  border-radius: 10px;
+  color: #000;
+}
+
+.mob_nav_link.active{
+  background-color: white;
+  margin-left: 1rem;
+  border-radius: 10px;
+  color: #000;
+}
+
+.mob-button{
+  margin-right: auto;
+  margin-left: auto;
+  width: 200px;
+  transition: all 0.3s;
+}
+
+.mob-button:hover{
+  background-color: white;
+  color: #000;
+  border-color: #000;
+}
+
+@media only screen and (max-width: 730px){
+  .nav_items{
+    display: none;
+  }
+
+  .btn-log-sign{
+    display: none;
+  }
+  
+  .baaar,.mob__bar{
+    display: block;
+  }
+
+}
+
+@media only screen and (min-width: 731px){
+
+  .mobile-nav{
+    display: none;
+  }
+
+}

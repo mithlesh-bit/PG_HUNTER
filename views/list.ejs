@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/list.css">
 
 
+
 <section class="light">
 
 	<div class="w-11/12 max-w-6xl">
@@ -8,8 +9,8 @@
 
 			<div class="mb-3 ">
 				<input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-					type="search" name="search" placeholder="Search">
-				<button type="submit"
+					type="search" name="search" placeholder="Search" id="roomSearch">
+				<button type="submit" onclick="serachforRoom()"
 					class="border-2 border-gray-300 bg-tranparent  w-24 ml-3 my-auto rounded-lg text-sm focus:outline-none object-contain ">
 					<svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
 						xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -21,58 +22,64 @@
 				</button>
 			</div>
 
-	
+
 		</div>
 		<div class="container py-2">
-			<% details.forEach(function(user) { %>
-				<div class="postcard light blue">
-					<% if (user.image && user.image.length> 0) { %>
-						<a class="postcard__img_link" href="#">
-							<img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
-						</a>
-						<% } else { %>
+
+			
+			<% 
+				var array = details
+				%>
+
+
+
+				<% array.forEach(function(user) { %>
+					<div class="postcard light blue">
+						<% if (user.image && user.image.length> 0) { %>
 							<a class="postcard__img_link" href="#">
-								<img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
+								<img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
 							</a>
-							<% } %>
-								<div class="postcard__text  t-dark">
-									<!-- <h1 class="postcard__title blue"><a href="#">
-												<%= user.name %>
-											</a></h1> -->
-									<div class="postcard__subtitle small">
-										<time datetime="2020-05-25 12:00:00">
-											<h3 class="<%= user.current_status === 'AVAILABLE' ? 'green-text' : 'red-text' %>">
-												<%= user.current_status %>
+							<% } else { %>
+								<a class="postcard__img_link" href="#">
+									<img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
+								</a>
+								<% } %>
+									<div class="postcard__text  t-dark">
+										<div class="postcard__subtitle small">
+											<time datetime="2020-05-25 12:00:00">
+												<h3 class="<%= user.current_status === 'AVAILABLE' ? 'green-text' : 'red-text' %>">
+													<%= user.current_status %>
 												</h3>
-																						
-										</time>
+
+											</time>
+										</div>
+										<div class="postcard__bar <%= user.current_status === 'AVAILABLE' ? 'green-text' : 'red-text' %>"></div>
+										<div class="postcard__preview-txt"><i class="fas fa-location mr-2 "></i>
+											<%= user.location %>
+										</div>
+										<ul class="postcard__tagbox">
+											<li class="tag__item">
+												<%= user.for %>
+											</li>
+											<li class="tag__item">
+												<%= user.service %>
+											</li>
+											<li class="tag__item play blue">
+												<a href="/user-details?userId=<%= user._id %>"><i class="fas fa-play mr-2"></i>more....</a>
+											</li>
+										</ul>
 									</div>
-									<div class="postcard__bar"></div>
-									<div class="postcard__preview-txt"><i class="fas fa-location mr-2 "></i> <%= user.location %>
-									</div>
-									<!-- <div class="postcard__preview-txt"> SERVICE: <%= user.service %>
-										</div> -->
-									<ul class="postcard__tagbox">
-										<!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>
-												<%= user.contact %>
-											</li> -->
-										<li class="tag__item">
-											<%= user.for %>
-										</li>
-										<li class="tag__item">
-											<%= user.service %>
-										</li>
-										<li class="tag__item play blue">
-											<a href="/user-details?userId=<%= user._id %>"><i
-													class="fas fa-play mr-2"></i>more....</a>
-										</li>
-									</ul>
-								</div>
-				</div>
-				<% }); %>
-				
+					</div>
+					<% }); %>
+
 		</div>
 
 	</div>
 
 </section>
+
+<script>
+	console.log(array);
+</script>
+
+<script src="/js/list.js" async defer></script>

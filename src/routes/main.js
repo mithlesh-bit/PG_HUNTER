@@ -86,12 +86,12 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
           // Add the new image URL to the user's profile
           user.image.push({ url: result.secure_url });
           await user.save();
-          resp.render('dashboard', { user });
+          resp.redirect('dashboard');
         });
       } else {
         // No image was uploaded, so don't modify the user's image array
         await user.save();
-        resp.render('dashboard', { user });
+        resp.redirect('dashboard');
       }
     } catch (error) {
       console.error(error);
