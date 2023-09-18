@@ -10,6 +10,9 @@ html {
     box-sizing: inherit;
   }
   
+  a{
+    text-decoration: none;
+  }
   .u-float-right {
     float: right;
   }

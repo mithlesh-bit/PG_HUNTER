@@ -71,7 +71,10 @@ a:hover {
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 1.2rem 0;
-  transition: scale 0.3s;;
+}
+
+.container > .postcard:only-child{
+  width: 90%;
 }
 
 .postcard__img_link{
@@ -85,9 +88,7 @@ a:hover {
   border-bottom-left-radius: 10px;
 }
 
-.postcard:hover{
-  scale: 1.02;
-}
+
 
 .postcard__text  {
   width: 70%;
@@ -152,4 +153,9 @@ a:hover {
   .postcard{
     width: 90%;
   }
+}
+
+
+.serarchform.active{
+  z-index: -1;
 }

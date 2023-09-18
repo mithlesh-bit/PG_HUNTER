@@ -24,6 +24,7 @@ function forgetpage() {
 }
 
 function signuppage() {
+  goback()
   close_mob_bar()
   home.classList.add("show")
   formContainer.classList.add("active");
@@ -33,6 +34,7 @@ function signuppage() {
 }
 
 function loginpage() {
+  goback()
   close_mob_bar()
   home.classList.add("show")
   formContainer.classList.remove("active");
@@ -44,6 +46,7 @@ function loginpage() {
 
 formCloseBtn.addEventListener("click", () => {
   home.classList.remove("show")
+  gofront()
 })
 
 
@@ -209,4 +212,11 @@ function forgothandle() {
     });
 }
 
+function goback(){
+  document.querySelector('.serarchform').classList.add('active');
+}
+
+function gofront(){
+  document.querySelector('.serarchform').classList.remove('active');
+}
 

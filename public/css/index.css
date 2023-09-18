@@ -38,6 +38,7 @@ body{
 .nav_logo,
 .nav_link,
 .button {
+  text-decoration: none;
   color: #fff;
 }
 .nav_logo {
@@ -148,7 +149,7 @@ body{
   border-bottom: 1.5px solid #aaaaaa;
 }
 .input_box input:focus {
-  border-color: #7d2ae8;
+  border-color: #1f1f1f;
 }
 .input_box i,.input_box img {
   position: absolute;
@@ -163,7 +164,7 @@ body{
 }
 .input_box input:focus ~ i.email,
 .input_box input:focus ~ i.password {
-  color: #7d2ae8;
+  color: #1f1f1f;
 }
 .input_box i.pw_hide {
   right: 0;
@@ -177,7 +178,7 @@ body{
   justify-content: space-between;
 }
 .form_container a {
-  color: #7d2ae8;
+  color: #1f1f1f;
   font-size: 12px;
 }
 .form_container a:hover {
@@ -189,7 +190,7 @@ body{
   white-space: nowrap;
 }
 .checkbox input {
-  accent-color: #7d2ae8;
+  accent-color: #1f1f1f;
 }
 .checkbox label {
   font-size: 12px;
@@ -198,7 +199,7 @@ body{
   color: #0b0217;
 }
 .form_container .button {
-  background: #7d2ae8;
+  background: #1f1f1f;
   margin-top: 30px;
   width: 100%;
   padding: 10px 0;
@@ -256,6 +257,7 @@ body{
 }
 
 .mob_nav_item .mob_nav_link{
+  text-decoration: none;
   text-align: right;
   margin-right: 2rem;
   padding: 0.6rem 2rem;
@@ -320,4 +322,9 @@ body{
     display: none;
   }
 
+}
+
+.roz-logo{
+  /* height: 3%; */
+  width: 250px;
 }

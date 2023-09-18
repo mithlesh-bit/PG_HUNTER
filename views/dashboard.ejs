@@ -38,7 +38,9 @@
 
   <header class="header relative">
     <nav class="nav">
-      <a href="/" class="nav_logo">ROOMOZA</a>
+      <a href="/landing" class="nav_logo">
+        <img class="roz-logo" src="/assets/ROOMOZA-logo.png" alt="">
+      </a>
 
       <ul class="nav_items">
         <li class="nav_item">
@@ -60,13 +62,13 @@
 
       <div class="mobile-nav">
         <li class="mob_nav_item">
-          <a href="/" class="mob_nav_link active">Home</a>
+          <a href="/" class="mob_nav_link">Home</a>
           <a href="#" class="mob_nav_link">Find PG</a>
           <a href="#" class="mob_nav_link">Services</a>
           <a href="/landing" class="mob_nav_link">About</a>
           
           <% if (user && user.name) { %>
-              <a href="dashboard" class="mob_nav_link" id="loginbtn">
+              <a href="dashboard" class="mob_nav_link active" id="loginbtn">
                 <%= user.name %>
               </a>
               <a href="/logout" class="mob_nav_link red" id="logout">
@@ -134,10 +136,18 @@
           </div>
         </div>
         <div class="w-full h-[250px]">
-          <img src="<%= user.image[0].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+          <% if (user.image && user.image.length > 1) {%>
+          <img src="<%= user.image[1].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+          <% }else{ %>
+            <img src="/assets/bg.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+            <% } %>
         </div>
         <div class="flex flex-col items-center -mt-20">
-          <img src="<%= user.image[1].url %>" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
+          <% if (user.image && user.image.length > 0) {%>
+          <img src="<%= user.image[0].url %>" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
+          <% }else{%>
+            <img src="/assets/img/bg_reset.jpg" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
+          <% } %>
           <div class="flex items-center space-x-2 mt-2">
             <p class="text-2xl">
               <%= user.name %>
@@ -246,9 +256,6 @@
                     <% for (let index=0; index < user.image.length; index++) { %>
                         <div class="mySlides1 w-full h-full">
                           <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>">
-                          <button class="delImgBtn" data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">
-                            <i class="fa-solid fa-trash icondel"></i>
-                          </button>
                         </div>
                         <% } %>
 
@@ -301,9 +308,9 @@
                 <input type="text" class="form-control" id="namehome" name="namehome" placeholder="<%=user.namehome%>" />
               </div>
 
-              <div class="form_item">
+              <div class="mb-3 form_item">
                 <label for="service" class="form-label">Room Type</label>
-                <select name="service" aria-placeholder=<%=user.service%> class="form-control" id="service">
+                <select name="service"  class="form-control" aria-placeholder=<%=user.service%> id="service">
                   <option value="" disabled selected>Choose a Room Type</option>
                   <option value="PG">PG</option>
                   <option value="FLAT">Flat</option>

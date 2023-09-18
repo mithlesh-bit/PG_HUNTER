@@ -1,21 +1,7 @@
-let array = [];
-array = details;
-function serachforRoom() {
-  var searchInput = "i"; // Get the value from the input field
-  
-  // Your search logic here
-  if (searchInput == "") {
-    array = details;
-  } else {
-    details.forEach(function (item) {
-      // Check if item and item.location are defined
-      if (item && item.location && typeof item.location === 'string') {
-        // Check if item.location contains 'searchInput' (case-insensitive)
-        if (item.location.toLowerCase().includes(searchInput.toLowerCase())) {
-          array.push(item);
-        }
-      }
-    });
-  }
+const searchbtn=document.getElementById("searchbtn");
+	searchbtn.addEventListener("click",function(){
+		console.log("1");
+		const redirect='/'
+		window.location.href=redirect
 
-}
+	});

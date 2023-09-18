@@ -20,6 +20,18 @@
     />
     <title>Landing Page</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <style>
+      .devimg{
+        width: 15rem;
+        height: 15rem;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+    </style>
   </head>
   <body class="text-gray-800 antialiased">
     <nav
@@ -349,13 +361,12 @@
             </div>
           </div>
           <div class="flex flex-wrap">
-            <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+            <div class="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4 w-44 h-44 ">
               <div class="px-6">
                 <img
                   alt="Jitesh Ayam"
                   src="/assets/img/jitesh.jpeg"
-                  class="shadow-lg rounded-full max-w-full mx-auto"
-                  style="max-width: 120px;"
+                  class="devimg"
                 />
                 <div class="pt-6 text-center">
                   <h5 class="text-xl font-bold">Jitesh Ayam</h5>
@@ -388,8 +399,7 @@
                 <img
                   alt="..."
                   src="/assets/img/mithlesh.jpeg"
-                  class="shadow-lg rounded-full max-w-full mx-auto"
-                  style="max-width: 120px;"
+                  class="devimg"
                 />
                 <div class="pt-6 text-center">
                   <h5 class="text-xl font-bold">Mithlesh Rawte</h5>
@@ -421,9 +431,8 @@
               <div class="px-6">
                 <img
                   alt="..."
-                  src="/assets/img/team-3-800x800.jpg"
-                  class="shadow-lg rounded-full max-w-full mx-auto"
-                  style="max-width: 120px;"
+                  src="/assets/img/ashu.jpg"
+                  class="devimg"
                 />
                 <div class="pt-6 text-center">
                   <h5 class="text-xl font-bold">Ashutosh Choubey</h5>
@@ -456,8 +465,7 @@
                 <img
                   alt="..."
                   src="/assets/img/dinesh.jpeg"
-                  class="shadow-lg rounded-full max-w-full mx-auto"
-                  style="max-width: 120px;"
+                  class="devimg"
                 />
                 <div class="pt-6 text-center">
                   <h5 class="text-xl font-bold">Dinesh Prabhakar</h5>
@@ -773,56 +781,5 @@
       </div>
     </footer>
   </body>
-  <script>
-    function toggleNavbar(collapseID) {
-      document.getElementById(collapseID).classList.toggle("hidden");
-      document.getElementById(collapseID).classList.toggle("block");
-    }
-
-
-    function messagehandle(event) {
-  event.preventDefault(); // Prevent the default form submission
-
-  const form = document.getElementById('messageForm');
-
-  // Get the email, message, and name values from the form fields
-  const email = form.querySelector('input[name="email"]').value;
-  const message = form.querySelector('textarea[name="message"]').value;
-  const name = form.querySelector('input[name="name"]').value;
-
-  fetch('/landing', {
-    method: 'POST',
-    body: JSON.stringify({ email, message, name }), // Updated the field names
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data.success);
-      if (data.success) { // Compare to the boolean value true
-        // Display a success pop-up
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: data.message
-        }).then(() => {
-          // Redirect or perform other actions after displaying the pop-up
-          window.location.href = '/landing'; // Correct the redirection URL
-        });
-      } else {
-        // Display an error pop-up
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: data.message
-        });
-      }
-    });
-}
-
-const form = document.getElementById('messageForm');
-form.addEventListener('submit', messagehandle); // Attach the event listener
-
-  </script>
+<script src="/js/landing.js" async defer></script>
 </html>

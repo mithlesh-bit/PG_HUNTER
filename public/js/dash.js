@@ -36,8 +36,16 @@ async function sendLocation(position) {
 
 }
 
+function deleteImage(button){
+  var res = confirm("Are you sure you want to delete this Image?")
 
-function deleteImage(button) {
+  if(res) {
+    deletecurrnetImage(button)
+  } 
+}
+
+
+function deletecurrnetImage(button) {
   const imageId = button.getAttribute('data-id');
 
   // Make an HTTP DELETE request to the server to delete the image by its _id
