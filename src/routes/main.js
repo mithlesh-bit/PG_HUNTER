@@ -118,14 +118,20 @@ routes.get('/landing', (req, resp) => {
 
 // home------------------------------------------>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/',async (req, resp) => {
-
+  const searchValue = req.query.search;
         const token = req.cookies.jwt;
         let userName
         if (token) {
             try {
-                const verify = jwt.verify(token, process.env.secretKey);
-                const userName = await Register.findById(verify._id);
-                const details=await Register.find()
+              const verify = jwt.verify(token, process.env.secretKey);
+              const userName = await Register.findById(verify._id);
+              const regex = new RegExp( searchValue,'i');
+              if (searchValue) {
+                var details=await Register.find({ location: regex })
+              } else {
+                var details=await Register.find()
+              }
+                
 
                 resp.render('index', { details,userName });
               } catch (error) {
@@ -134,8 +140,12 @@ routes.get('/',async (req, resp) => {
             }
         } else {
           try {
-            
-            const details=await Register.find()
+            const regex = new RegExp( searchValue,'i');
+            if (searchValue) {
+              var details=await Register.find({ location: regex })
+            } else {
+              var details=await Register.find()
+            }
 
             resp.render('index', { details,userName });
           } catch (error) {

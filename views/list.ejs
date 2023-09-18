@@ -8,9 +8,10 @@
 		<div class="pt-2 relative mx-auto text-gray-600 flex justify-center items-center">
 
 			<div class="mb-3 ">
+				<form action="/" method="GET">
 				<input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
 					type="search" name="search" placeholder="Search" id="roomSearch">
-				<button type="submit" onclick="serachforRoom()"
+				<button type="submit" onclick="onsearch()" id="searchbtn"
 					class="border-2 border-gray-300 bg-tranparent  w-24 ml-3 my-auto rounded-lg text-sm focus:outline-none object-contain ">
 					<svg class="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
 						xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -21,19 +22,15 @@
 					</svg>
 				</button>
 			</div>
-
+		</form>
 
 		</div>
 		<div class="container py-2">
 
-			
 			<% 
 				var array = details
 				%>
-
-
-
-				<% array.forEach(function(user) { %>
+				<%	 array.forEach(function(user) { %>
 					<div class="postcard light blue">
 						<% if (user.image && user.image.length> 0) { %>
 							<a class="postcard__img_link" href="#">
@@ -79,7 +76,13 @@
 </section>
 
 <script>
-	console.log(array);
+	const searchbtn=document.getElementById("searchbtn");
+	searchbtn.addEventListener("click",function(){
+		console.log("1");
+		const redirect='/'
+		window.location.href=redirect
+
+	});
 </script>
 
-<script src="/js/list.js" async defer></script>
+<script src="/js/listjs.js" async defer></script>

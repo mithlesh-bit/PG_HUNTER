@@ -1,7 +1,7 @@
-var array = [];
+let array = [];
 array = details;
 function serachforRoom() {
-  var searchInput = document.getElementById('roomSearch').value; // Get the value from the input field
+  var searchInput = "i"; // Get the value from the input field
   
   // Your search logic here
   if (searchInput == "") {
