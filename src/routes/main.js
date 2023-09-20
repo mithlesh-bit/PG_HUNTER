@@ -51,7 +51,9 @@ routes.get('/dashboard', auth, async (req, resp) => {
   resp.render("dashboard", { user })
 });
 
-routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) => {
+const MAX_IMAGES = 5;
+
+routes.post('/dashboard', authdash, upload.array('image', MAX_IMAGES), async (req, resp) => {
   try {
     const token = req.cookies.jwt;
     const verify = jwt.verify(token, process.env.secretKey);
@@ -76,20 +78,26 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
       user.longitude = longitude;
     }
     // Handle uploading the image
-    if (req.file) {
-      cloudinary.uploader.upload(req.file.path, async (err, result) => {
-        if (err) {
-          console.error(err);
-          return resp.status(500).send('Upload failed.');
-        }
-
-        // Add the new image URL to the user's profile
-        user.image.push({ url: result.secure_url });
-        await user.save();
-        resp.redirect('dashboard');
+    if (req.files && req.files.length > 0) {
+      const imageUploadPromises = req.files.map((file) => {
+        return new Promise((resolve, reject) => {
+          cloudinary.uploader.upload(file.path, (err, result) => {
+            if (err) {
+              console.error(err);
+              reject(err);
+            } else {
+              user.image.push({ url: result.secure_url });
+              resolve();
+            }
+          });
+        });
       });
+
+      await Promise.all(imageUploadPromises);
+      await user.save();
+      resp.redirect('dashboard');
     } else {
-      // No image was uploaded, so don't modify the user's image array
+      // No images were uploaded, so don't modify the user's image array
       await user.save();
       resp.redirect('dashboard');
     }
@@ -98,7 +106,6 @@ routes.post('/dashboard', authdash, upload.single('image'), async (req, resp) =>
     resp.status(401).send('Login timeout. Please login.');
   }
 });
-
 
 
 // logout--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -238,7 +245,7 @@ routes.post('/forgot-pass', async (req, resp) => {
   }
   const token = await findinguser.generateAuthToken()
   // linkgenerating
-  const link = `http://localhost:3000/reset-pass/${findinguser._id}/${token}`
+  const link = `https://roomoza.onrender.com/reset-pass/${findinguser._id}/${token}`
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -250,7 +257,7 @@ routes.post('/forgot-pass', async (req, resp) => {
     theme: "default",
     product: {
       name: "Roomoza",
-      link: 'https://mailgen.js/'
+      link: 'https://roomoza.onrender.com/'
     }
   })
   let response = {
