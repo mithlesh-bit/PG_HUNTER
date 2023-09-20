@@ -6,6 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon ./src/app.js"
   },
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "author": "mtihlesh",
   "license": "ISC",
   "dependencies": {
