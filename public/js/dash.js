@@ -69,23 +69,40 @@ function deletecurrnetImage(button) {
 
 
 let slideIndex = [1, 1];
-let slideId = ["mySlides1", "mySlides2"]
+let slideIndex2 = [1, 1];
+let slideId = ["mySlides1"]
+let slideId2 = ["mySlides12"]
 showSlides(1, 0);
 showSlides(1, 1);
+showSlides2(1, 0);
+showSlides2(1, 1);
 
 function plusSlides(n, no) {
   showSlides(slideIndex[no] += n, no);
 }
+function plusSlides2(n, no) {
+  showSlides2(slideIndex2[no] += n, no);
+}
 
 function showSlides(n, no) {
   let i;
-  let x = document.getElementsByClassName(slideId[no]);
+  let x = document.getElementsByClassName('mySlides1');
   if (n > x.length) { slideIndex[no] = 1 }
   if (n < 1) { slideIndex[no] = x.length }
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
   }
   x[slideIndex[no] - 1].style.display = "block";
+}
+function showSlides2(n, no) {
+  let i;
+  let x = document.getElementsByClassName('mySlides2');
+  if (n > x.length) { slideIndex2[no] = 1 }
+  if (n < 1) { slideIndex2[no] = x.length }
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex2[no] - 1].style.display = "block";
 }
 
 

@@ -22,7 +22,6 @@ function handleWindowSizeChange() {
   const mobile_nav = document.querySelector('.mobile-nav');
   const close_mob_bar = document.querySelector('.close_baaar');
   const baaar = document.querySelector('.baaar');
-  close_mob_bar.style.display = "none";
 
   if (screenWidth >= 731) {
     mobile_nav.style.display = "none";
