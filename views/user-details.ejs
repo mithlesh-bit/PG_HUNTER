@@ -8,6 +8,7 @@
     <title>
         <%= userDetails.name %>
     </title>
+  <link rel="shortcut icon" href="/assets/favicon.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -24,7 +25,7 @@
 
     <header class="header relative">
         <nav class="nav">
-          <a href="/landing" class="nav_logo">
+          <a href="/" class="nav_logo">
             <img class="roz-logo" src="/assets/ROOMOZA-logo.png" alt="">
           </a>
       
@@ -159,11 +160,7 @@
         <div class="my-4 flex-1   flex-row 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4 sm:w-full">
           <div class=" flex  flex-col ">
             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
-              <div class="flex justify-between">
                 <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
-                <button id="editProfile" onclick="editProfile()" ><i class="fa-solid fa-pen"></i></button>
-
-              </div>
               <ul class="mt-2 text-gray-700">
                 <li class="flex border-y py-2">
                   <span class="font-bold w-24">Full name:</span>
@@ -207,7 +204,7 @@
         </div>
 
 
-        <div class="my-4 h-96 flex-1 ml-1  flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3 ">
+        <div class="my-4 h-96 flex-1 ml-1 w-1/2 flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3 hidden sm:flex">
 
           <!-- class=" flex  flex-col scroll-smooth overflow-x-auto w-full h-1/2  items-center rounded  bg-slate-800 rounded-lg drop-shadow-2xl ">
                   <img class="rounded-lg cover" src="/assets/1.jpg" alt="img">
@@ -232,6 +229,18 @@
 
     </div>
   </section>
+  <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-11/12 mx-auto sm:hidden flex">
+    <div class="slideshow-container h-full w-full">
+      <% for (let index=0; index < userDetails.image.length; index++) { %>
+        <div class="mySlides2 w-full h-full">
+          <img class="object-cover w-full h-full rounded-lg" src="<%= userDetails.image[index].url %>">
+        </div>
+        <% } %>
+        
+        <a class="prev" onclick="plusSlides2(-1, 0)">&#10094;</a>
+        <a class="next" onclick="plusSlides2(1, 0)">&#10095;</a>
+      </div>
+    </div>
 
     <script>
         let slideIndex = [1, 1];
