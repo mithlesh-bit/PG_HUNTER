@@ -19,6 +19,8 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <link rel="stylesheet" href="/css/index.css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Discover the ideal paying guest accommodations with ROOMOZA. Search for PGs, hostels, and shared living spaces in your preferred location. Find comfort and convenience today.">
+    
 
 
 </head>
@@ -133,7 +135,6 @@
           <div class="input_box">
             <input type="password" placeholder="password" name="pass" required />
             <i class="uil uil-lock password"></i>
-            <i class="uil uil-eye-slash pw_hides" onclick="showpassword()"></i>
           </div>
 
           <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
@@ -168,12 +169,10 @@
           <div class="input_box">
             <input type="password" placeholder="Create password" name="pass" required />
             <i class="uil uil-lock password"></i>
-            <i class="uil uil-eye-slash pw_hide"></i>
           </div>
           <div class="input_box">
             <input type="password" placeholder="Confirm password" name="repass" required />
             <i class="uil uil-lock password"></i>
-            <i class="uil uil-eye-slash pw_hide"></i>
           </div>
 
           <button class="button" id="signupBtnText" type="submit">Signup Now</button>
@@ -205,7 +204,7 @@
   <!-- list start -->
   <%- include('list.ejs') %>
 
-  <footer class="relative bg-gray-300 pt-8 pb-6">
+  <footer class="bg-gray-300 pt-8 pb-6">
     <div class="container mx-auto px-4">
       <div class="flex flex-wrap">
         <div class="w-full lg:w-6/12 px-4">
@@ -229,7 +228,7 @@
                   <i class="fa-brands fa-linkedin"></i></button>
               </a>
               <a href="https://www.instagram.com/i_am_ashutosh__9/">
-                <button class="instagram text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                <button class="  text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                   type="button">
                   <img src="/assets/insta.png" alt="">
                 </button>

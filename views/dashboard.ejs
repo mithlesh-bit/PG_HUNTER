@@ -163,7 +163,12 @@
           <p class="text-gray-700 font-semibold">
             <%= user.contact %>
           </p>
-          <p class="text-sm text-gray-500 font-bold">Near sai mandir</p>
+          <%if (user.location){
+            const inputString = user.location;
+            const parts = inputString.split(',');
+            loc = parts[0] +','+ parts [1] %>
+            <p class="text-sm text-gray-500 font-bold"> <%= loc %> </p>
+         <% }  %>
         </div>
         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
           <div class="flex items-center space-x-4 mt-2">
