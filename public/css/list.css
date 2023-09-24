@@ -101,7 +101,6 @@ a:hover {
 .postcard__tagbox{
   display: flex;
   flex-flow: row wrap;
-  font-size: 14px;
   margin: 20px 0 0 0;
   padding: 0;
   justify-content: center;
@@ -172,10 +171,6 @@ a:hover {
 
   h3{
     font-size: small;
-  }
-
-  .postcard__tagbox{
-    font-size: 10px;
   }
 
   .postcard .postcard__bar {
