@@ -29,10 +29,11 @@
 
 			<% var array=details %>
 				<% array.forEach(function(user) { %>
-					<a href="/user-details?userId=<%= user._id %>" class="postcard_link">
 					<div class="postcard light blue">
-							<% if (user.image && user.image.length > 0) { %>
+						<% if (user.image && user.image.length > 0) { %>
+							<a href="/user-details?userId=<%= user._id %>" class="postcard_link">
 									<img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
+								</a>
 							<% } else { %>
 									<img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
 							<% } %>
@@ -63,7 +64,6 @@
 								</ul>
 							</div>
 						</div>
-					</a>	
 					
 					<% }); %>
 
