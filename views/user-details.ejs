@@ -6,7 +6,7 @@
 <head>
     <!-- ... (head content) ... -->
     <title>
-        <%= userDetails.name %>
+        <%= userDetails?.name %>
     </title>
   <link rel="shortcut icon" href="/assets/favicon.png" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -113,13 +113,21 @@
           </div>
         </div>
         <div class="w-full h-[250px]">
-          <img src="<%= userDetails.image[0].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+          <% if (userDetails.image  &&  userDetails.image.length > 1) {%>
+          <img src="<%= userDetails?.image[1].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+          <% }else{ %>
+            <img src="/assets/bg.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+            <% } %>
         </div>
         <div class="flex flex-col items-center -mt-20">
-          <img src="<%= userDetails.image[1].url %>" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
+          <% if (userDetails.image && userDetails.image.length > 0) {%>
+            <img src="<%= userDetails?.image[0].url  %>" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
+            <% }else{ %>
+              <img src="/assets/img/bg_reset.jpg" class="w-40 h-40  object-cover border-solid border-4 border-white rounded-full">
+            <% } %>
           <div class="flex items-center space-x-2 mt-2">
             <p class="text-2xl">
-              <%= userDetails.name %>
+              <%= userDetails?.name %>
             </p>
             <span class="bg-blue-500 rounded-full p-1" title="Verified">
               <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24"
@@ -130,14 +138,14 @@
             </span>
           </div>
           <p class="text-gray-700 font-semibold">
-            <%= userDetails.contact %>
+            <%= userDetails?.contact %>
           </p>
-          <% const inputString = userDetails.location;
-          const parts = inputString.split(',');
-          loc = parts[1]
-
-          %>
-          <p class="text-sm text-gray-500 font-bold"><%= loc %></p>
+          <%if (userDetails.location){
+            const inputString = userDetails.location;
+            const parts = inputString.split(',');
+            loc = parts[0] +','+ parts [1] %>
+            <p class="text-sm text-gray-500 font-bold"> <%= loc %> </p>
+         <% }  %>
         </div>
         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
           <div class="flex items-center space-x-4 mt-2">
@@ -165,36 +173,36 @@
                 <li class="flex border-y py-2">
                   <span class="font-bold w-24">Full name:</span>
                   <span class="text-gray-700">
-                    <%= userDetails.name %>
+                    <%= userDetails?.name %>
                   </span>
                 </li>
 
                 <li class="flex border-b py-2">
                   <span class="font-bold w-24">Mobile:</span>
                   <span class="text-gray-700 hover:select-all">
-                    <%= userDetails.contact %>
+                    <%= userDetails?.contact %>
                   </span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                     <span class="font-bold w-24">Room Type</span>
-                    <span class="text-gray-700"><%=userDetails.for%></span>
+                    <span class="text-gray-700"><%=userDetails?.for%></span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                     <span class="font-bold w-24">Room available:</span>
-                    <span class="text-gray-700"><%=userDetails.numroom%></span>
+                    <span class="text-gray-700"><%=userDetails?.numroom%></span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                     <span class="font-bold w-24">Extra facilities:</span>
-                    <span class="text-gray-700"><%=userDetails.highlight%></span>
+                    <span class="text-gray-700"><%=userDetails?.highlight%></span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                     <span class="font-bold w-24">Landmark:</span>
-                    <span class="text-gray-700"><%=userDetails.lankmark%></span>
+                    <span class="text-gray-700"><%=userDetails?.lankmark%></span>
                 </li>
                 <li class="flex border-b py-2">
                   <span class="font-bold w-24">Location:</span>
                   <span class="text-gray-700">
-                    <%= userDetails.location %>
+                    <%= userDetails?.location %>
                   </span>
                 </li>
               </ul>
@@ -204,17 +212,14 @@
         </div>
 
 
+        <% if (userDetails.image && userDetails.image.length > 0) { %>
         <div class="my-4 h-96 flex-1 ml-1 w-1/2 flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3 hidden sm:flex">
 
-          <!-- class=" flex  flex-col scroll-smooth overflow-x-auto w-full h-1/2  items-center rounded  bg-slate-800 rounded-lg drop-shadow-2xl ">
-                  <img class="rounded-lg cover" src="/assets/1.jpg" alt="img">
-                  <img class="rounded-lg" src="/assets/3.jpg" alt="img">
-                  <img class="rounded-lg" src="/assets/2.jpg" alt="img"> -->
 
                   <div class="slideshow-container h-full w-full">
-                    <% for (let index=0; index < userDetails.image.length; index++) { %>
+                    <% for (let index=0; index < userDetails?.image.length; index++) { %>
                         <div class="mySlides1 w-full h-full">
-                          <img class="object-cover w-full h-full rounded-lg" src="<%= userDetails.image[index].url %>">
+                          <img class="object-cover w-full h-full rounded-lg" src="<%= userDetails?.image[index].url %>">
                         </div>
                         <% } %>
 
@@ -223,6 +228,7 @@
                 </div>
 
         </div>
+        <% } %>
 
 
       </div>
@@ -231,9 +237,9 @@
   </section>
   <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-11/12 mx-auto sm:hidden flex">
     <div class="slideshow-container h-full w-full">
-      <% for (let index=0; index < userDetails.image.length; index++) { %>
+      <% for (let index=0; index < userDetails?.image.length; index++) { %>
         <div class="mySlides2 w-full h-full">
-          <img class="object-cover w-full h-full rounded-lg" src="<%= userDetails.image[index].url %>">
+          <img class="object-cover w-full h-full rounded-lg" src="<%= userDetails?.image[index].url %>">
         </div>
         <% } %>
         

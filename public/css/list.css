@@ -62,9 +62,13 @@ a:hover {
   gap: 5%;
 }
 
+.postcard_link{
+  width: 45%;
+}
+
 .postcard{
   background-color: #e1e5ea;
-  width: 45%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
@@ -150,7 +154,7 @@ a:hover {
 }
 
 @media only screen and (max-width: 1023px) {
-  .postcard{
+  .postcard_link{
     width: 90%;
   }
 }
