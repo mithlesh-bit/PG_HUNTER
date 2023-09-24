@@ -248,8 +248,7 @@
 
         <div class="my-4 h-96 flex-1 ml-1 w-1/2 flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3 hidden sm:flex">
 
-          <!-- class=" flex  flex-col scroll-smooth overflow-x-auto w-full h-1/2  items-center rounded  bg-slate-800 rounded-lg drop-shadow-2xl ">
-                  <img class="rounded-lg cover" src="/assets/1.jpg" alt="img">
+                 <img class="rounded-lg cover" src="/assets/1.jpg" alt="img">
                   <img class="rounded-lg" src="/assets/3.jpg" alt="img">
                   <img class="rounded-lg" src="/assets/2.jpg" alt="img"> -->
 
@@ -272,7 +271,7 @@
     </div>
   </section>
     
-    
+  <% if (user.image &&  user.image.length > 0) { %>
     <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-11/12 mx-auto sm:hidden flex">
       <div class="slideshow-container h-full w-full">
         <% for (let index=0; index < user.image.length; index++) { %>
@@ -285,7 +284,7 @@
           <a class="next" onclick="plusSlides2(1, 0)">&#10095;</a>
         </div>
       </div>
-  
+  <% }%>
 
 
   <section class="w-full flex justify-center items-center w-full border-hidden card bg-gray-200" id="myForm">

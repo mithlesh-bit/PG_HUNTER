@@ -233,6 +233,7 @@
 
     </div>
   </section>
+  <% if (userDetails.image &&  userDetails.image.length > 0) { %>
   <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-11/12 mx-auto sm:hidden flex">
     <div class="slideshow-container h-full w-full">
       <% for (let index=0; index < userDetails?.image.length; index++) { %>
@@ -245,6 +246,7 @@
         <a class="next" onclick="plusSlides2(1, 0)">&#10095;</a>
       </div>
     </div>
+    <% }%>
 
     <script>
         let slideIndex = [1, 1];
