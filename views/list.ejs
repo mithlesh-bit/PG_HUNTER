@@ -29,11 +29,10 @@
 
 			<% var array=details %>
 				<% array.forEach(function(user) { %>
+					<a href="/user-details?userId=<%= user._id %>" class="postcard_link">
 					<div class="postcard light blue">
 						<% if (user.image && user.image.length > 0) { %>
-							<a href="/user-details?userId=<%= user._id %>" class="postcard_link">
 									<img class="postcard__img" src="<%= user.image[0].url %>" alt="First Image" />
-								</a>
 							<% } else { %>
 									<img class="postcard__img" src="/assets/img/bg.jpg" alt="First Image" />
 							<% } %>
@@ -48,7 +47,14 @@
 								</div>
 								<div class="postcard__bar <%= user.current_status === 'AVAILABLE' ? 'green-text' : 'red-text' %>"></div>
 								<div class="postcard__preview-txt"><i class="fas fa-location mr-2 "></i>
-									<%= user.location %>
+									
+									<%if (user.location){
+										const inputString = user.location;
+										const parts = inputString.split(',');
+										loc = parts[0] +','+ parts [1] %>
+										<p class="text-sm"> <%= loc %> </p>
+								 <% }  %>
+
 								</div>
 								<ul class="postcard__tagbox">
 									<li class="tag__item play blue">
@@ -64,6 +70,7 @@
 								</ul>
 							</div>
 						</div>
+						</a>
 					
 					<% }); %>
 
