@@ -62,9 +62,14 @@ a:hover {
   gap: 5%;
 }
 
+.postcard_link{
+  width: 45%;
+
+}
+
 .postcard{
   background-color: #e1e5ea;
-  width: 45%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
@@ -77,8 +82,7 @@ a:hover {
   width: 90%;
 }
 
-.postcard__img_link{
-}
+
 
 .postcard__img{
   width: 220px;
@@ -97,7 +101,6 @@ a:hover {
 .postcard__tagbox{
   display: flex;
   flex-flow: row wrap;
-  font-size: 14px;
   margin: 20px 0 0 0;
   padding: 0;
   justify-content: center;
@@ -150,8 +153,40 @@ a:hover {
 }
 
 @media only screen and (max-width: 1023px) {
-  .postcard{
+  .postcard_link{
     width: 90%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .postcard__img{
+    width: 100px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .postcard__preview-txt{
+    font-size: smaller;
+  }
+
+  h3{
+    font-size: small;
+  }
+
+  .postcard .postcard__bar {
+    height: 3px;
+  }
+
+  .postcard{
+    gap: 1.2rem;
+    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
+    border-radius: 10px;
+    margin: 0 0 1rem 0;
+    height: 11rem;
+  }
+
+  .postcard__img{
+    height: 11rem;
   }
 }
 

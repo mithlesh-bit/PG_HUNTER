@@ -114,6 +114,11 @@ routes.get('/logout', (req, resp) => {
   resp.redirect('/')
 })
 
+// terms and condtion--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+routes.get('/terms', (req, resp) => {
+  resp.render('terms')
+})
+
 // login---------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 routes.get('/login', (req, resp) => {
   resp.render('login')

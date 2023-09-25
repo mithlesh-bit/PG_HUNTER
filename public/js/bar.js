@@ -16,6 +16,8 @@ function close_mob_bar() {
   baaar.style.display = "block";
 }
 
+close_mob_bar()
+
 
 function handleWindowSizeChange() {
   const screenWidth = window.innerWidth;

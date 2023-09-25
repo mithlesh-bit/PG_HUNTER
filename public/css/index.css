@@ -1,10 +1,11 @@
-/* Import Google font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+  @import url('https://fonts.googleapis.com/css2?family=Catamaran&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Catamaran', sans-serif;
 }
 a {
   text-decoration: none;
@@ -260,8 +261,8 @@ body{
   text-decoration: none;
   text-align: right;
   margin-right: 2rem;
-  padding: 0.6rem 2rem;
-  font-size: 1.2rem;
+  padding: 0.4rem 2rem;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -325,6 +326,9 @@ body{
 }
 
 .roz-logo{
-  /* height: 3%; */
-  width: 250px;
+  width: 110px;
+}
+
+.instagram {
+  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
 }
