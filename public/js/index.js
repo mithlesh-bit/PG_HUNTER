@@ -5,11 +5,12 @@ const signbtn = document.querySelector("#signupbtn"),
   forgot = document.querySelector("#forgot"),
   formContainer = document.querySelector(".form_container"),
   formCloseBtn = document.querySelector(".form_close"),
-  pwShowHide = document.querySelectorAll(".pw_hide"),
   loginform = document.querySelector("#loginform"),
   loginlink = document.querySelector("#login"),
   signuplink = document.querySelector("#signup"),
   forgotlink = document.querySelector("#forgotlink");
+  
+const pwShowHide = document.querySelectorAll(".pw_hide")
 
 
 signbtn.addEventListener("click", () => signuppage())
@@ -26,16 +27,18 @@ function forgetpage() {
 function signuppage() {
   goback()
   close_mob_bar()
+  forgot.style.display = "none";
   home.classList.add("show")
   formContainer.classList.add("active");
   loginform.style.display = "none";
   forgot.style.display = "none";
-
+  
 }
 
 function loginpage() {
   goback()
   close_mob_bar()
+  forgot.style.display = "none";
   home.classList.add("show")
   formContainer.classList.remove("active");
   loginform.style.display = "block";
@@ -54,14 +57,22 @@ pwShowHide.forEach((icon) => {
   icon.addEventListener("click", () => {
     let getPwInput = icon.parentElement.querySelector("input");
     if (getPwInput.type === "password") {
+      console.log(getPwInput.type);
       getPwInput.type = "text";
+      console.log(getPwInput.type);
       icon.classList.replace("uil-eye-slash", "uil-eye");
     } else {
       getPwInput.type = "password";
       icon.classList.replace("uil-eye", "uil-eye-slash");
     }
+    console.log(getPwInput.type);
+    console.log(getPwInput);
   });
 });
+
+function showpassword(){
+
+}
 
 
 
