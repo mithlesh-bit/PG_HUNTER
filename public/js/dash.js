@@ -72,11 +72,15 @@ let slideIndex = [1, 1];
 let slideIndex2 = [1, 1];
 let slideId = ["mySlides1"]
 let slideId2 = ["mySlides12"]
+let slideId3 = ["mySlides3"]
 showSlides(1, 0);
 showSlides(1, 1);
 showSlides2(1, 0);
 showSlides2(1, 1);
 
+function plusSlides(n, no) {
+  showSlides(slideIndex[no] += n, no);
+}
 function plusSlides(n, no) {
   showSlides(slideIndex[no] += n, no);
 }
@@ -87,12 +91,15 @@ function plusSlides2(n, no) {
 function showSlides(n, no) {
   let i;
   let x = document.getElementsByClassName('mySlides1');
+  let y = document.getElementsByClassName('mySlides3');
   if (n > x.length) { slideIndex[no] = 1 }
   if (n < 1) { slideIndex[no] = x.length }
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
+    y[i].style.display = "none";
   }
   x[slideIndex[no] - 1].style.display = "block";
+  y[slideIndex[no] - 1].style.display = "block";
 }
 function showSlides2(n, no) {
   let i;
@@ -112,3 +119,34 @@ function editProfile() {
   myForm.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 }
 
+
+
+// JavaScript functions to open and close the image modal
+function openImage(image) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+
+  modal.style.display = 'block';
+
+  // Adding the 'show' class to trigger the transition
+  modal.classList.add('show');
+
+  modalImg.src = image.src;
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+
+  // Removing the 'show' class to trigger the transition
+  modal.classList.remove('show');
+
+  // Setting a timeout to hide the modal after the transition
+  setTimeout(() => {
+      modal.style.display = 'none';
+  }, 300); // Adjust the timeout to match your transition duration (0.3s in this example)
+}
+
+function openPhoneDialer(phoneNumber) {
+  // Use the 'tel:' link to initiate a phone call with the received phone number
+  window.location.href = `tel:${phoneNumber}`;
+}
