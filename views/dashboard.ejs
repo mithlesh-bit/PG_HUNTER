@@ -345,70 +345,69 @@
 
                       <div class="mb-3 form_item">
                         <label for="name" class="form-label">Your Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="<%=user.name%>" />
+                        <input type="text" class="form-control" id="name" name="name" value="<%=user.name%>" />
                       </div>
 
                       <div class="mb-3 form_item">
                         <label for="namehome" class="form-label">House Name</label>
                         <input type="text" class="form-control" id="namehome" name="namehome"
-                          placeholder="<%=user.namehome%>" />
+                          value="<%=user.namehome%>" />
                       </div>
 
                       <div class="mb-3 form_item">
                         <label for="service" class="form-label">Room Type</label>
-                        <select name="service" class="form-control" aria-placeholder=<%=user.service%> id="service">
-                          <option value="" disabled selected>Choose a Room Type</option>
-                          <option value="PG">PG</option>
-                          <option value="FLAT">Flat</option>
-                          <option value="HOSTEL">Hostel</option>
+                        <select name="service" class="form-control" value="<%=user.service%>" id="service">
+                          <option value="" disabled >Choose a Room Type</option>
+                          <option value="PG" <% if (user.for === "PG") { %> selected <% } %>>PG</option>
+                          <option value="FLAT" <% if (user.for === "FLAT") { %> selected <% } %>>Flat</option>
+                          <option value="HOSTEL" <% if (user.for === "HOSTEL") { %> selected <% } %>>Hostel</option>
                         </select>
                       </div>
 
                       <div class="mb-3 form_item">
                         <label for="numroom" class="form-label">No. of Room</label>
                         <input type="text" class="form-control" id="numroom" name="numroom"
-                          placeholder=<%=user.numroom%> >
+                          value="<%=user.numroom%>" >
                       </div>
 
 
                       <div class="mb-3 form_item">
-                        <label for="forValue" class="form-label"> Available For</label>
-                        <select name="forValue" class="form-control" id="forValue">
-                          <option value="" disabled selected>Choose a </option>
-                          <option value="BOY">Boy</option>
-                          <option value="GIRL">Girl</option>
-                          <option value="FAMILY">Family</option>
-                        </select>
+                          <label for="forValue" class="form-label">Available For</label>
+                          <select name="forValue" class="form-control" id="forValue">
+                              <option value="" disabled>Choose a</option>
+                              <option value="BOY" <% if (user.for === "BOY") { %> selected <% } %>>Boy</option>
+                              <option value="GIRL" <% if (user.for === "GIRL") { %> selected <% } %>>Girl</option>
+                              <option value="FAMILY" <% if (user.for === "FAMILY") { %> selected <% } %>>Family</option>
+                          </select>
                       </div>
 
                       <div class="mb-3 form_item">
                         <label for="current_status" class="form-label">current status</label>
                         <select name="current_status" class="form-control" id="current_status">
-                          <option value="" disabled selected>Choose Availability </option>
-                          <option value="AVAILABLE">Available</option>
-                          <option value="UNAVAILABLE">Unavailablel</option>
+                          <option value="" disabled>Choose Availability </option>
+                          <option value="AVAILABLE" <% if (user.for === "AVAILABLE") { %> selected <% } %>>Available</option>
+                          <option value="UNAVAILABLE" <% if (user.for === "UNAVAILABLE") { %> selected <% } %>>Unavailablel</option>
                         </select>
                       </div>
 
                       <div class="mb-3 form_item">
                         <label for="contact" class="form-label">Contact</label>
                         <input type="text" class="form-control" id="contact" name="contact"
-                          placeholder=<%=user.contact%> >
+                          value="<%=user.contact%>" >
                       </div>
                     </div>
 
 
                     <div class="mb-3 form_item">
                       <label for="highlight" class="form-label">Highlight</label>
-                      <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3"
-                        placeholder="<%= user.status %>"></textarea>
+                      <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3"><%= user.highlight %></textarea>
                     </div>
 
                     <div class="form">
                       <div class="mb-3 form_item">
                         <label for="location" class="form-label">Location</label>
                         <div class="flex">
-                          <input type="text" placeholder="<%= user.location%>" class="form-control" id="location"
+                          <input type="text" value="<%= user.location%>" class="form-control" id="location"
                             name="location" />
                           <button type="button" onclick="getLocation()"><i
                               class="fa-solid fa-location-dot ml-2"></i></button>
@@ -420,35 +419,31 @@
                       <div class="mb-3 form_item">
                         <label for="landmark" class="form-label">Landmark</label>
                         <input type="text" class="form-control" id="landmark" name="landmark"
-                          placeholder=<%=user.landmark%> eg:playing-Ground>
+                          value="<%=user.landmark%>">
                       </div>
 
 
 
-                    </div>
-
-                    <div class="mb-3 form_item">
-                      <label for="contact" class="form-label">number of rooms</label>
-                      <input type="num" class="form-control" id="numroom" name="numroom" placeholder="04" />
-                    </div>
-        </div>
-
-
-        <input type="hidden" id="latitude" name="latitude" />
-        <input type="hidden" id="longitude" name="longitude" />
-
-
-        <div class="flex justify-between flex-wrap">
-          <div>
-            <label for="exampleInputPassword1" class="form-label">Enter image (Optional)</label>
-            <input type="file" id="photo" name="image" multiple /><br /><br />
-          </div>
-
-          <div class="flex ">
-            <button type="submit" class="button update text-black">Update</button>
-          </div>
-          </form>
-          <% }%>
+                      
+                      </div>
+                    
+                    
+                    <input type="hidden" id="latitude" name="latitude" />
+                    <input type="hidden" id="longitude" name="longitude" />
+                    
+                    
+                    <div class="flex justify-between flex-wrap">
+                      <div>
+                        <label for="exampleInputPassword1" class="form-label">Enter image (Optional)</label>
+                        <input type="file" id="photo" name="image" multiple /><br /><br />
+                        </div>
+                        
+                        <div class="flex ">
+                          <button type="submit" class="button update text-black">Update</button>
+                          </div>
+                          </form>
+                          <% }%>
+                          </div>
         </div>
       </section>
 

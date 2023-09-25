@@ -48,10 +48,7 @@
 								<div class="postcard__bar <%= user.current_status === 'AVAILABLE' ? 'green-text' : 'red-text' %>"></div>
 								<div class="postcard__preview-txt"><i class="fas fa-location mr-2 "></i>
 									
-									<%if (user.location){
-										// const inputString = user.location;
-										// const parts = inputString.split(',');
-										// loc = parts[0] +','+ parts [1] %>
+									<%if (user.location){%>
 										<p class="sm:text-xl text-md"> <%= user.location.slice(0, 50) %> ... </p>
 								 <% }  %>
 
