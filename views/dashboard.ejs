@@ -29,20 +29,25 @@
   <link rel="stylesheet" href="/css/dash.css" />
   <link rel="stylesheet" type="text/css" href="/css/detail.css">
 
-  <style>
-    .modal{
-      left: 5vw;
-      top : 2vh;
-    }
-  </style>
-
 </head>
 
 <body class="bg-gray-200">
 
 
 
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeImageModal()">&times;</span>
+    <div class="slideshow-container h-full w-full">
+      <% for (let index=0; index < user.image.length; index++) { %>
+        <div class="mySlides3 w-full h-full">
+          <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>">
+        </div>
+        <% } %>
 
+          <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+    </div>
+  </div>
   <header class="header relative">
     <nav class="nav">
       <a href="/" class="nav_logo">
@@ -86,19 +91,7 @@
 
     </nav>
   </header>
-  <div id="imageModal" class="modal">
-    <span class="close" onclick="closeImageModal()">&times;</span>
-    <div class="slideshow-container h-full w-full">
-      <% for (let index=0; index < user.image.length; index++) { %>
-        <div class="mySlides3 w-full h-full">
-          <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>">
-        </div>
-        <% } %>
-
-          <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-          <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-    </div>
-  </div>
+ 
   <section class="w-full bg-gray-200 items-center justify-center flex">
     
     <div class="h-full p-4 max-w-6xl relative w-11/12">
@@ -118,7 +111,7 @@
             class="bg-white absolute right-0 w-40 py-2 mt-1 border border-gray-200 shadow-2xl" style="display: none;">
             <div class="py-2 border-b">
               <p class="text-gray-400 text-xs px-6 uppercase mb-1">Settings</p>
-              <button class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200">
+              <button class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200" onclick="sharebutton()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -307,12 +300,12 @@
         <% for (let index=0; index < user.image.length; index++) { %>
           <div class="mySlides2 w-full h-full">
             <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>"
->
+            onclick="openImage(this)">
           </div>
           <% } %>
 
-            <a class="prev" onclick="plusSlides2(-1, 0)">&#10094;</a>
-            <a class="next" onclick="plusSlides2(1, 0)">&#10095;</a>
+            <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
       </div>
     </div>
     <% }%>
