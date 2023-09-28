@@ -25,7 +25,7 @@
 
 <body class="bg-gray-200">
 
-  <header class="header relative">
+  <header class="section header relative">
     <nav class="nav">
       <a href="/" class="nav_logo">
         <img class="roz-logo" src="/assets/ROOMOZA-logo.png" alt="">
@@ -59,9 +59,22 @@
 
     </nav>
   </header>
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeImageModal()">&times;</span>
 
+        <div class="slideshow-container w-full">
+          <% for (let index=0; index < userDetails.image.length; index++) { %>
+            <div class="mySlides3 w-full h-full">
+              <img class="object-cover w-full h-full rounded" src="<%= userDetails.image[index].url %>">
+            </div>
+            <% } %>
 
-  <section class="w-full bg-gray-200 items-center justify-center flex">
+              <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+              <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+        </div>
+      </div>
+
+  <section class="section bg-gray-200 items-center justify-center flex">
     <div class="h-full p-4 max-w-6xl relative w-11/12">
       <div class="bg-white rounded-lg shadow-xl pb-8 ">
         <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
@@ -246,25 +259,12 @@
 
       </div>
       <!-- The modal container for displaying enlarged images -->
-      <div id="imageModal" class="modal">
-    <span class="close" onclick="closeImageModal()">&times;</span>
-
-        <div class="slideshow-container h-full w-full">
-          <% for (let index=0; index < userDetails.image.length; index++) { %>
-            <div class="mySlides3 w-full h-full">
-              <img class="object-cover w-full h-full rounded-lg" src="<%= userDetails.image[index].url %>">
-            </div>
-            <% } %>
-
-              <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-              <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-        </div>
-      </div>
+      
 
     </div>
   </section>
   <% if (userDetails.image && userDetails.image.length> 0) { %>
-    <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-10/12  mx-auto sm:hidden flex">
+    <div class="section bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-10/12  mx-auto sm:hidden flex">
       <div class="slideshow-container h-full w-full">
         <% for (let index=0; index < userDetails?.image.length; index++) { %>
           <div class="mySlides2 w-full h-full">

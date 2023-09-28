@@ -107,8 +107,13 @@ function editProfile() {
 function openImage(image) {
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImage');
+  const section = document.querySelectorAll('.section');
 
-  modal.style.display = 'block';
+  modal.style.display = 'flex';
+
+  for (sec of section){
+    sec.style.filter = "blur(4px)";
+  }
 
   // Adding the 'show' class to trigger the transition
   modal.classList.add('show');
@@ -118,9 +123,14 @@ function openImage(image) {
 
 function closeImageModal() {
   const modal = document.getElementById('imageModal');
+  const section = document.querySelectorAll('.section');
+
 
   // Removing the 'show' class to trigger the transition
   modal.classList.remove('show');
+  for (sec of section){
+    sec.style.filter = "blur(0px)";
+  }
 
   // Setting a timeout to hide the modal after the transition
   setTimeout(() => {

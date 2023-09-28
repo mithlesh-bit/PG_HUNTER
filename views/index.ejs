@@ -19,7 +19,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/css/index.css" />
 
-  <meta name="icon" content="/assets/favicon.png">
+  <meta property="og:title" content="Roomoza">
+  <meta property="og:image" content="/assets/favicon.png">
+  <meta property="og:description" content="Discover the ideal paying guest accommodations with ROOMOZA. Search for PGs, hostels, and shared living spaces in your preferred location. Find comfort and convenience today.">
+  <meta property="og:url" content="https://roomoza.onrender.com">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="Discover the ideal paying guest accommodations with ROOMOZA. Search for PGs, hostels, and shared living spaces in your preferred location. Find comfort and convenience today.">
     
 
@@ -135,7 +139,7 @@
           </div>
 
           <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
-          <button class="button" id="loginnowtext" type="submit">Login Now</button>
+          <button class="button relative h-12" id="loginnowtext" type="submit">Login Now</button>
 
           <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
         </form>
@@ -172,8 +176,19 @@
             <i class="uil uil-lock password"></i>
           </div>
 
-          <button class="button" id="signupBtnText" type="submit">Signup Now</button>
-
+          
+          <div class="tacbox">
+            <div class="checkbox-wrapper-39">
+              <label>
+                <input type="checkbox" required/>
+                <span class="checkbox"></span>
+              </label>
+            </div>
+            <label for="checkbox"> I agree to these <a href="/terms">Terms and Conditions</a>.</label>
+          </div>
+          
+          <button class="button relative h-12" id="signupBtnText" type="submit">Signup Now</button>
+          
           <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
         </form>
       </div>
@@ -189,7 +204,7 @@
             <i class="uil uil-envelope-alt email"></i>
           </div>
 
-          <button class="button" type="submit" id="resetBtnText">send</button>
+          <button class="button relative h-12" type="submit" id="resetBtnText">send</button>
 
         </form>
 
@@ -239,17 +254,10 @@
               <span class="block uppercase text-gray-600 text-sm font-semibold mb-2">Useful Links</span>
               <ul class="list-unstyled">
                 <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">About Us</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Blog</a>
+                  <a href="/landing" class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">About Us</a>
                 </li>
                 <li>
                   <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Github</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                    href="https://www.creative-tim.com/bootstrap-themes/free">Free Products</a>
                 </li>
               </ul>
             </div>
@@ -262,14 +270,8 @@
                     Bilaspur</a>
                 </li>
                 <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Terms &amp;
+                  <a href="/terms" class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Terms &amp;
                     Conditions</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Privacy Policy</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Contact Us</a>
                 </li>
               </ul>
             </div>

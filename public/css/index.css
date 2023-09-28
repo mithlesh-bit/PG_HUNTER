@@ -135,7 +135,7 @@ body{
 }
 .input_box {
   position: relative;
-  margin-top: 30px;
+  margin-top: 10px;
   width: 100%;
   height: 40px;
 }
@@ -342,3 +342,88 @@ button {
 .instagram {
     background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
   }
+
+  .tacbox {
+    display:flex;
+    padding: 0.5em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .tacbox input {
+    height: 1.25rem;
+    width: 1.25rem;
+    vertical-align: middle;
+  }
+
+
+  .checkbox-wrapper-39 *,
+  .checkbox-wrapper-39 *::before,
+  .checkbox-wrapper-39 *::after {
+    box-sizing: border-box;
+  }
+
+  .checkbox-wrapper-39 label {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .checkbox-wrapper-39 input {
+    visibility: hidden;
+    display: none;
+  }
+
+  .checkbox-wrapper-39 input:checked ~ .checkbox {
+   transform: rotate(45deg);
+   width: 8px;
+   margin-left: 12px;
+   border-color: #24c78e;
+   border-top-color: transparent;
+   border-left-color: transparent;
+   border-radius: 0;
+  }
+
+  .checkbox-wrapper-39 .checkbox {
+    width: inherit;
+    height: inherit;
+    border: 3px solid #434343;
+    border-radius: 1px;
+    transition: all 0.375s;
+  }
+
+  .loader {
+    width: 28px;
+    height: 28px;
+    border: 3px solid #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after {
+      content: '';  
+    box-sizing: border-box;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-bottom-color: #e5a710;
+  }
+      
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
