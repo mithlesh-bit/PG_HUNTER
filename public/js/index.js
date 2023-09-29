@@ -19,6 +19,7 @@ loginbtn.addEventListener("click", () => loginpage());
 loginlink.addEventListener("click", () => loginpage());
 forgotlink.addEventListener("click", () => forgetpage());
 
+console.log(loginlink);
 function forgetpage() {
   loginform.style.display = "none";
   forgot.style.display = "block";
@@ -83,7 +84,7 @@ function handleLoginFormSubmission() {
 
 
   const loginnowtext = document.querySelector("#loginnowtext")
-  loginnowtext.innerHTML = "Processing..."
+  loginnowtext.innerHTML = `<span class="loader"></span>`
   loginnowtext.disabled = true;
   // loginnowtext = "Processing..."
   // Get the email and password values from the form fields
@@ -143,7 +144,7 @@ function registerhandle() {
   const form = document.getElementById('registerForm');
 
   const signupBtnText = document.querySelector('#signupBtnText')
-  signupBtnText.innerHTML = "Processing..."
+  signupBtnText.innerHTML = `<span class="loader"></span>`
   signupBtnText.disabled = true;
 
   // Get the email and password values from the form fields
@@ -191,7 +192,7 @@ function registerhandle() {
 function forgothandle() {
   const form = document.getElementById('forgotPass');
   const resetBtnText = document.querySelector('#resetBtnText')
-  resetBtnText.innerHTML = "Processing..."
+  resetBtnText.innerHTML = `<span class="loader"></span>`
   resetBtnText.disabled = true;
   const email = form.querySelector('input[name="email"]').value;
   fetch('/forgot-pass', {
