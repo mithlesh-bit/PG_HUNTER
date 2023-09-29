@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData(resetPasswordForm);
     const password = formData.get("password");
     const password2 = formData.get("password2");
-
+console.log("hii");
     // Get the _id and token from the URL
     const pathSegments = window.location.pathname.split('/');
 const _id = pathSegments[2];
