@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
-  <title><%= user.name%></title>
+  <title>
+    <%= user.name%>
+  </title>
   <link rel="shortcut icon" href="/assets/favicon.png" />
   <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/apple-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,13 +21,11 @@
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
   <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
   <!-- for alert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/css/style.css" />
-  
+
   <link rel="stylesheet" href="/css/dash.css" />
   <link rel="stylesheet" type="text/css" href="/css/detail.css">
 
@@ -35,8 +35,20 @@
 
 
 
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeImageModal()">&times;</span>
+    <div class="slideshow-container ">
+      <% for (let index=0; index < user.image.length; index++) { %>
+        <div class="mySlides3 w-full h-full">
+          <img class="object-cover w-full h-full rounded" src="<%= user.image[index].url %>">
+        </div>
+        <% } %>
 
-  <header class="header relative">
+          <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+    </div>
+  </div>
+  <header class="section header relative">
     <nav class="nav">
       <a href="/" class="nav_logo">
         <img class="roz-logo" src="/assets/ROOMOZA-logo.png" alt="">
@@ -62,25 +74,26 @@
         <li class="mob_nav_item">
           <a href="/" class="mob_nav_link">Home</a>
           <a href="/landing" class="mob_nav_link">About</a>
-          
+
           <% if (user && user.name) { %>
-              <a href="dashboard" class="mob_nav_link active" id="loginbtn">
-                <%= user.name %>
-              </a>
-              <a href="/logout" class="mob_nav_link red" id="logout">
-                Logout
-              </a>
+            <a href="dashboard" class="mob_nav_link active" id="loginbtn">
+              <%= user.name %>
+            </a>
+            <a href="/logout" class="mob_nav_link red" id="logout">
+              Logout
+            </a>
             <% } else { %>
               <button class="button mob-button" onclick="signuppage()" id="signupbtn">signup</button>
               <button class="button mob-button" onclick="loginpage()" id="loginbtn">Login</button>
               <% } %>
-          </li>
+        </li>
       </div>
 
     </nav>
   </header>
-
-  <section class="w-full bg-gray-200 items-center justify-center flex">
+ 
+  <section class="section w-full bg-gray-200 items-center justify-center flex">
+    
     <div class="h-full p-4 max-w-6xl relative w-11/12">
       <div class="bg-white rounded-lg shadow-xl pb-8 ">
         <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
@@ -98,7 +111,7 @@
             class="bg-white absolute right-0 w-40 py-2 mt-1 border border-gray-200 shadow-2xl" style="display: none;">
             <div class="py-2 border-b">
               <p class="text-gray-400 text-xs px-6 uppercase mb-1">Settings</p>
-              <button class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200">
+              <button class="w-full flex items-center px-6 py-1.5 space-x-2 hover:bg-gray-200" onclick="sharebutton()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -132,53 +145,41 @@
           </div>
         </div>
         <div class="w-full sm:h-[250px] h-[100px]">
-          <% if (user.image && user.image.length > 1) {%>
-          <img src="<%= user.image[1].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
-          <% }else{ %>
-            <img src="/assets/bg.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
-            <% } %>
+          <% if (user.image && user.image.length> 1) {%>
+            <img src="<%= user.image[1].url %>" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+            <% }else{ %>
+              <img src="/assets/bg.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg object-cover">
+              <% } %>
         </div>
         <div class="flex flex-col items-center sm:-mt-20 -mt-8">
-          <% if (user.image && user.image.length > 0) {%>
-          <img src="<%= user.image[0].url %>" class="sm:w-40 w-20 h-20 sm:h-40  object-cover border-solid border-4 border-white rounded-full">
-          <% }else{%>
-            <img src="/assets/img/bg_reset.jpg" class="sm:w-40 w-20 h-20 sm:h-40  object-cover border-solid border-4 border-white rounded-full">
-          <% } %>
-          <div class="flex items-center space-x-2 mt-2">
-            <p class="text-2xl">
-              <%= user.name %>
-            </p>
-            <span class="bg-blue-500 rounded-full p-1" title="Verified">
-              <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7">
-                </path>
-              </svg>
-            </span>
-          </div>
-          <p class="text-gray-700 font-semibold">
-            <%= user.contact %>
-          </p>
-          <%if (user.location){
-            const inputString = user.location;
-            const parts = inputString.split(',');
-            loc = parts[0] +','+ parts [1] %>
-            <p class="text-sm text-gray-500 font-bold"> <%= loc %> </p>
-         <% }  %>
-        </div>
-        <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
-          <div class="flex items-center space-x-4 mt-2">
-            <button
-              class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-                </path>
-              </svg>
-              <span>Contact</span>
-            </button>
-
-          </div>
+          <% if (user.image && user.image.length> 0) {%>
+            <img src="<%= user.image[0].url %>"
+              class="sm:w-40 w-20 h-20 sm:h-40  object-cover border-solid border-4 border-white rounded-full">
+            <% }else{%>
+              <img src="/assets/img/bg_reset.jpg"
+                class="sm:w-40 w-20 h-20 sm:h-40  object-cover border-solid border-4 border-white rounded-full">
+              <% } %>
+                <div class="flex items-center space-x-2 mt-2">
+                  <p class="text-2xl">
+                    <%= user.name %>
+                  </p>
+                  <span class="bg-blue-500 rounded-full p-1" title="Verified">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none"
+                      viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7">
+                      </path>
+                    </svg>
+                  </span>
+                </div>
+                <p class="text-gray-700 font-semibold">
+                  <%= user.contact %>
+                </p>
+                <%if (user.location){ const inputString=user.location; const parts=inputString.split(','); loc=parts[0]
+                  +','+ parts [1] %>
+                  <p class="text-sm text-gray-500 font-bold">
+                    <%= loc %>
+                  </p>
+                  <% } %>
         </div>
       </div>
 
@@ -189,7 +190,7 @@
             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
               <div class="flex justify-between">
                 <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
-                <button id="editProfile" onclick="editProfile()" ><i class="fa-solid fa-pen"></i></button>
+                <button id="editProfile" onclick="editProfile()"><i class="fa-solid fa-pen"></i></button>
 
               </div>
               <ul class="mt-2 text-gray-700">
@@ -214,19 +215,27 @@
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                   <span class="font-bold w-24">Room Type</span>
-                  <span class="text-gray-700"><%=user.for%></span>
+                  <span class="text-gray-700">
+                    <%=user.for%>
+                  </span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                   <span class="font-bold w-24">Room available:</span>
-                  <span class="text-gray-700"><%=user.numroom%></span>
+                  <span class="text-gray-700">
+                    <%=user.numroom%>
+                  </span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                   <span class="font-bold w-24">Extra facilities:</span>
-                  <span class="text-gray-700"><%=user.highlight%></span>
+                  <span class="text-gray-700">
+                    <%=user.highlight%>
+                  </span>
                 </li>
                 <li class="flex items-center border-b py-2 space-x-2">
                   <span class="font-bold w-24">Landmark:</span>
-                  <span class="text-gray-700"><%=user.landmark%></span>
+                  <span class="text-gray-700">
+                    <%=user.landmark%>
+                  </span>
                 </li>
                 <li class="flex border-b py-2">
                   <span class="font-bold w-24">Location:</span>
@@ -248,20 +257,19 @@
 
         <div class="my-4 h-96 flex-1 ml-1 w-1/2 flex-row 2xl:flex-row space-y-4 2xl:space-y-0 ml-3 hidden sm:flex">
 
-                 <img class="rounded-lg cover" src="/assets/1.jpg" alt="img">
-                  <img class="rounded-lg" src="/assets/3.jpg" alt="img">
-                  <img class="rounded-lg" src="/assets/2.jpg" alt="img"> -->
+          <div class="slideshow-container h-full w-full">
+            <% for (let index=0; index < user.image.length; index++) { %>
+              <div class="mySlides1 w-full h-full">
+                <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>"
+                  onclick="openImage(this)">
+              </div>
+              <% } %>
 
-                  <div class="slideshow-container h-full w-full">
-                    <% for (let index=0; index < user.image.length; index++) { %>
-                        <div class="mySlides1 w-full h-full">
-                          <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>">
-                        </div>
-                        <% } %>
-
-                            <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
-                            <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
-                </div>
+                <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+          </div>
+          
+          
 
         </div>
 
@@ -269,161 +277,158 @@
       </div>
 
     </div>
-  </section>
-    
-  <% if (user.image &&  user.image.length > 0) { %>
-    <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-11/12 mx-auto sm:hidden flex">
+    </section>
+    <!-- The modal container for displaying enlarged images -->
+
+  <% if (user.image && user.image.length> 0) { %>
+    <div class="bg-gray-200 flex h-1/2 flex-wrap h-96 max-w-6xl mb-4 flex-1 w-10/12 mx-auto sm:hidden flex">
       <div class="slideshow-container h-full w-full">
         <% for (let index=0; index < user.image.length; index++) { %>
           <div class="mySlides2 w-full h-full">
-            <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>">
+            <img class="object-cover w-full h-full rounded-lg" src="<%= user.image[index].url %>"
+            onclick="openImage(this)">
           </div>
           <% } %>
-          
-          <a class="prev" onclick="plusSlides2(-1, 0)">&#10094;</a>
-          <a class="next" onclick="plusSlides2(1, 0)">&#10095;</a>
-        </div>
+
+            <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
       </div>
-  <% }%>
-
-
-  <section class="w-full flex justify-center items-center w-full border-hidden card bg-gray-200" id="myForm">
-
-    <div class="w-11/12 max-w-6xl mt-4 rounded-lg p-4 mb-12 h-full bg-white mx-auto relative">
-
-      <% if (user ) { %>
-
-        <!-- Iterate through user images and display with delete buttons -->
-        <div class="userimgcontainer">
-          <% for (let index=0; index < user.image.length; index++) { %>
-            <div class="iiimg">
-              <img class="Userhomeimg" src="<%= user.image[index].url %>">
-              <button class="delImgBtn" data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-            <% } %>
-        </div>
-        <% } else { %>
-          <p>User data is not available.</p>
-          <% } %>
-
-          <% if (user ) { %>
-          <form  action="/dashboard" method="post" enctype="multipart/form-data">
-
-            <div class="form mt-4">
-
-              <div class="mb-3 form_item">
-                <label for="name" class="form-label">Your Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="<%=user.name%>" />
-              </div>
-
-              <div class="mb-3 form_item">
-                <label for="namehome" class="form-label">House Name</label>
-                <input type="text" class="form-control" id="namehome" name="namehome" placeholder="<%=user.namehome%>" />
-              </div>
-
-              <div class="mb-3 form_item">
-                <label for="service" class="form-label">Room Type</label>
-                <select name="service"  class="form-control" aria-placeholder=<%=user.service%> id="service">
-                  <option value="" disabled selected>Choose a Room Type</option>
-                  <option value="PG">PG</option>
-                  <option value="FLAT">Flat</option>
-                  <option value="HOSTEL">Hostel</option>
-                </select>
-              </div>
-
-              <div class="mb-3 form_item">
-                <label for="numroom" class="form-label">No. of Room</label>
-                <input type="text" class="form-control" id="numroom" name="numroom" placeholder=<%=user.numroom%> >
-              </div>
-
-
-              <div class="mb-3 form_item">
-                <label for="forValue" class="form-label"> Available For</label>
-                <select name="forValue" class="form-control" id="forValue">
-                  <option value="" disabled selected>Choose a </option>
-                  <option value="BOY">Boy</option>
-                  <option value="GIRL">Girl</option>
-                  <option value="FAMILY">Family</option>
-                </select>
-              </div>
-
-              <div class="mb-3 form_item">
-                <label for="current_status" class="form-label">current status</label>
-                <select name="current_status" class="form-control" id="current_status">
-                  <option value="" disabled selected>Choose Availability </option>
-                  <option value="AVAILABLE">Available</option>
-                  <option value="UNAVAILABLE">Unavailablel</option>
-                </select>
-              </div>
-
-              <div class="mb-3 form_item">
-                <label for="contact" class="form-label">Contact</label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder=<%=user.contact%> >
-              </div>
-            </div>
-
-
-            <div class="mb-3 form_item">
-              <label for="highlight" class="form-label">Highlight</label>
-              <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3"
-                placeholder="<%= user.status %>"></textarea>
-            </div>
-
-            <div class="form">
-              <div class="mb-3 form_item">
-                <label for="location" class="form-label">Location</label>
-                <div class="flex">
-                  <input type="text" placeholder="<%= user.location%>" class="form-control" id="location"
-                    name="location" />
-                  <button type="button" onclick="getLocation()"><i class="fa-solid fa-location-dot ml-2"></i></button>
-                </div>
-              </div>
-
-
-
-              <div class="mb-3 form_item">
-                <label for="landmark" class="form-label">Landmark</label>
-                <input type="text" class="form-control" id="landmark" name="landmark" placeholder=<%=user.landmark%> eg:playing-Ground>
-              </div>
-
-
-              
-            </div>
-
-            <!-- <div class="mb-3 form_item">
-                  <label for="contact" class="form-label">number of rooms</label>
-                  <input type="num" class="form-control" id="numroom" name="numroom" placeholder="04" />
-                </div>
-              </div> -->
-
-
-            <!-- Adding hidden input fields for latitude and longitude -->
-            <input type="hidden" id="latitude" name="latitude" />
-            <input type="hidden" id="longitude" name="longitude" />
-
-
-            <div class="flex justify-between flex-wrap">
-              <div>
-                <label for="exampleInputPassword1" class="form-label">Enter image (Optional)</label>
-                <input type="file" id="photo" name="image" multiple /><br /><br />
-              </div>
-
-              <div class="flex ">
-                <button type="submit" class="button update text-black">Update</button>
-                <!-- <p>Not a member? <a href="#">Signup now</a></p> -->
-              </div>
-          </form>
-          <% }%>
     </div>
-  </section>
+    <% }%>
 
-  <!-- Add this JavaScript code to your HTML file -->
 
-  <script src="/js/dash.js" async defer></script>
-  <script src="/js/bar.js" async defer></script>
-  
+      <section class="section w-full flex justify-center items-center w-full border-hidden card bg-gray-200" id="myForm">
+
+        <div class="w-11/12 max-w-6xl mt-4 rounded-lg p-4 mb-12 h-full bg-white mx-auto relative">
+
+          <% if (user ) { %>
+
+            <div class="userimgcontainer">
+              <% for (let index=0; index < user.image.length; index++) { %>
+                <div class="iiimg">
+                  <img class="Userhomeimg" src="<%= user.image[index].url %>">
+                  <button class="delImgBtn" data-id="<%= user.image[index]._id %>" onclick="deleteImage(this)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+                <% } %>
+            </div>
+            <% } else { %>
+              <p>User data is not available.</p>
+              <% } %>
+
+                <% if (user ) { %>
+                  <form action="/dashboard" method="post" enctype="multipart/form-data">
+
+                    <div class="form mt-4">
+
+                      <div class="mb-3 form_item">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" class="form-control" id="name" name="name" value="<%=user.name%>" />
+                      </div>
+
+                      <div class="mb-3 form_item">
+                        <label for="namehome" class="form-label">House Name</label>
+                        <input type="text" class="form-control" id="namehome" name="namehome"
+                          value="<%=user.namehome%>" />
+                      </div>
+
+                      <div class="mb-3 form_item">
+                        <label for="service" class="form-label">Room Type</label>
+                        <select name="service" class="form-control" value="<%=user.service%>" id="service">
+                          <option value="" disabled >Choose a Room Type</option>
+                          <option value="PG" <% if (user.for === "PG") { %> selected <% } %>>PG</option>
+                          <option value="FLAT" <% if (user.for === "FLAT") { %> selected <% } %>>Flat</option>
+                          <option value="HOSTEL" <% if (user.for === "HOSTEL") { %> selected <% } %>>Hostel</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3 form_item">
+                        <label for="numroom" class="form-label">No. of Room</label>
+                        <input type="text" class="form-control" id="numroom" name="numroom"
+                          value="<%=user.numroom%>" >
+                      </div>
+
+
+                      <div class="mb-3 form_item">
+                          <label for="forValue" class="form-label">Available For</label>
+                          <select name="forValue" class="form-control" id="forValue">
+                              <option value="" disabled>Choose a</option>
+                              <option value="BOY" <% if (user.for === "BOY") { %> selected <% } %>>Boy</option>
+                              <option value="GIRL" <% if (user.for === "GIRL") { %> selected <% } %>>Girl</option>
+                              <option value="FAMILY" <% if (user.for === "FAMILY") { %> selected <% } %>>Family</option>
+                          </select>
+                      </div>
+
+                      <div class="mb-3 form_item">
+                        <label for="current_status" class="form-label">current status</label>
+                        <select name="current_status" class="form-control" id="current_status">
+                          <option value="" disabled>Choose Availability </option>
+                          <option value="AVAILABLE" <% if (user.for === "AVAILABLE") { %> selected <% } %>>Available</option>
+                          <option value="UNAVAILABLE" <% if (user.for === "UNAVAILABLE") { %> selected <% } %>>Unavailablel</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3 form_item">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="contact" name="contact"
+                          value="<%=user.contact%>" >
+                      </div>
+                    </div>
+
+
+                    <div class="mb-3 form_item">
+                      <label for="highlight" class="form-label">Highlight</label>
+                      <textarea name="highlight" class="form-control" id="highlight" cols="30" rows="3"><%= user.highlight %></textarea>
+                    </div>
+
+                    <div class="form">
+                      <div class="mb-3 form_item">
+                        <label for="location" class="form-label">Location</label>
+                        <div class="flex">
+                          <input type="text" value="<%= user.location%>" class="form-control" id="location"
+                            name="location" />
+                          <button type="button" onclick="getLocation()"><i
+                              class="fa-solid fa-location-dot ml-2"></i></button>
+                        </div>
+                      </div>
+
+
+
+                      <div class="mb-3 form_item">
+                        <label for="landmark" class="form-label">Landmark</label>
+                        <input type="text" class="form-control" id="landmark" name="landmark"
+                          value="<%=user.landmark%>">
+                      </div>
+
+
+
+                      
+                      </div>
+                    
+                    
+                    <input type="hidden" id="latitude" name="latitude" />
+                    <input type="hidden" id="longitude" name="longitude" />
+                    
+                    
+                    <div class="flex justify-between flex-wrap">
+                      <div>
+                        <label for="exampleInputPassword1" class="form-label">Enter image (Optional)</label>
+                        <input type="file" id="photo" name="image" multiple /><br /><br />
+                        </div>
+                        
+                        <div class="flex ">
+                          <button type="submit" class="button update text-black">Update</button>
+                          </div>
+                          </form>
+                          <% }%>
+                          </div>
+        </div>
+      </section>
+
+      <script src="/js/dash.js" async defer></script>
+      <script src="/js/bar.js" async defer></script>
+
 </body>
 
 </html>

@@ -11,38 +11,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roomoza</title>
-  <link rel="stylesheet" href="/css/style.css" />
   <!-- Unicons -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css" />
   <script src="https://kit.fontawesome.com/dc5e06456d.js" crossorigin="anonymous"></script>
   <!-- for alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <link rel="stylesheet" href="/css/index.css" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/index.css" />
 
+  <meta property="og:title" content="Roomoza">
   <meta property="og:image" content="/assets/favicon.png">
-    <meta property="og:image:width" content="120">
-    <meta property="og:image:height" content="60">
-    <!-- Logo Metadata for schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://roomoza.onrender.com/landing",
-      "@type": "Roomoza",
-      "url": "https://roomoza.onrender.com/",
-      "logo": "/assets/favicon.png"
-    }
-    </script>
-
+  <meta property="og:description" content="Discover the ideal paying guest accommodations with ROOMOZA. Search for PGs, hostels, and shared living spaces in your preferred location. Find comfort and convenience today.">
+  <meta property="og:url" content="https://roomoza.onrender.com">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="Discover the ideal paying guest accommodations with ROOMOZA. Search for PGs, hostels, and shared living spaces in your preferred location. Find comfort and convenience today.">
     
 
 
 </head>
-<style>
-.instagram {
-  background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
-}
-</style>
+
 
 <body class="bg-gray-300">
 
@@ -152,7 +139,7 @@
           </div>
 
           <div class="login_signup">Don't have an account? <a href="#" id="forgotlink">forgot password</a></div>
-          <button class="button" id="loginnowtext" type="submit">Login Now</button>
+          <button class="button relative h-12" id="loginnowtext" type="submit">Login Now</button>
 
           <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
         </form>
@@ -189,8 +176,19 @@
             <i class="uil uil-lock password"></i>
           </div>
 
-          <button class="button" id="signupBtnText" type="submit">Signup Now</button>
-
+          
+          <div class="tacbox">
+            <div class="checkbox-wrapper-39">
+              <label>
+                <input type="checkbox" required/>
+                <span class="checkbox"></span>
+              </label>
+            </div>
+            <label for="checkbox"> I agree to these <a href="/terms">Terms and Conditions</a>.</label>
+          </div>
+          
+          <button class="button relative h-12" id="signupBtnText" type="submit">Signup Now</button>
+          
           <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
         </form>
       </div>
@@ -206,7 +204,7 @@
             <i class="uil uil-envelope-alt email"></i>
           </div>
 
-          <button class="button" type="submit" id="resetBtnText">send</button>
+          <button class="button relative h-12" type="submit" id="resetBtnText">send</button>
 
         </form>
 
@@ -242,9 +240,9 @@
                   <i class="fa-brands fa-linkedin"></i></button>
               </a>
               <a href="https://www.instagram.com/i_am_ashutosh__9/">
-                <button class="  text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                  type="button">
-                  <img src="/assets/insta.png" alt="">
+                <button class="instagram text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                  >
+                  <i class="fa-brands fa-instagram"></i>
                 </button>
               </a>
             </div>
@@ -256,17 +254,10 @@
               <span class="block uppercase text-gray-600 text-sm font-semibold mb-2">Useful Links</span>
               <ul class="list-unstyled">
                 <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">About Us</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Blog</a>
+                  <a href="/landing" class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">About Us</a>
                 </li>
                 <li>
                   <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Github</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                    href="https://www.creative-tim.com/bootstrap-themes/free">Free Products</a>
                 </li>
               </ul>
             </div>
@@ -279,14 +270,8 @@
                     Bilaspur</a>
                 </li>
                 <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Terms &amp;
+                  <a href="/terms" class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Terms &amp;
                     Conditions</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Privacy Policy</a>
-                </li>
-                <li>
-                  <a class="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm">Contact Us</a>
                 </li>
               </ul>
             </div>

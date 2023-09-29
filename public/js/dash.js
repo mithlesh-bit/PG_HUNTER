@@ -36,12 +36,12 @@ async function sendLocation(position) {
 
 }
 
-function deleteImage(button){
+function deleteImage(button) {
   var res = confirm("Are you sure you want to delete this Image?")
 
-  if(res) {
+  if (res) {
     deletecurrnetImage(button)
-  } 
+  }
 }
 
 
@@ -69,40 +69,29 @@ function deletecurrnetImage(button) {
 
 
 let slideIndex = [1, 1];
-let slideIndex2 = [1, 1];
-let slideId = ["mySlides1"]
-let slideId2 = ["mySlides12"]
 showSlides(1, 0);
 showSlides(1, 1);
-showSlides2(1, 0);
-showSlides2(1, 1);
 
 function plusSlides(n, no) {
   showSlides(slideIndex[no] += n, no);
-}
-function plusSlides2(n, no) {
-  showSlides2(slideIndex2[no] += n, no);
 }
 
 function showSlides(n, no) {
   let i;
   let x = document.getElementsByClassName('mySlides1');
+  let y = document.getElementsByClassName('mySlides2');
+  let z = document.getElementsByClassName('mySlides3');
   if (n > x.length) { slideIndex[no] = 1 }
   if (n < 1) { slideIndex[no] = x.length }
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
+    y[i].style.display = "none";
+    z[i].style.display = "none";
   }
   x[slideIndex[no] - 1].style.display = "block";
-}
-function showSlides2(n, no) {
-  let i;
-  let x = document.getElementsByClassName('mySlides2');
-  if (n > x.length) { slideIndex2[no] = 1 }
-  if (n < 1) { slideIndex2[no] = x.length }
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[slideIndex2[no] - 1].style.display = "block";
+  y[slideIndex[no] - 1].style.display = "block";
+  z[slideIndex[no] - 1].style.display = "block";
+
 }
 
 
@@ -112,3 +101,71 @@ function editProfile() {
   myForm.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 }
 
+
+
+// JavaScript functions to open and close the image modal
+function openImage(image) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  const section = document.querySelectorAll('.section');
+
+  modal.style.display = 'flex';
+
+  for (sec of section){
+    sec.style.filter = "blur(4px)";
+  }
+
+  // Adding the 'show' class to trigger the transition
+  modal.classList.add('show');
+
+  modalImg.src = image.src;
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+  const section = document.querySelectorAll('.section');
+
+
+  // Removing the 'show' class to trigger the transition
+  modal.classList.remove('show');
+  for (sec of section){
+    sec.style.filter = "blur(0px)";
+  }
+
+  // Setting a timeout to hide the modal after the transition
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300); // Adjust the timeout to match your transition duration (0.3s in this example)
+}
+
+function openPhoneDialer(phoneNumber) {
+  // Use the 'tel:' link to initiate a phone call with the received phone number
+  window.location.href = `tel:${phoneNumber}`;
+}
+
+
+
+const shareButton = document.getElementById('share-button');
+
+// Check if the Web Share API is available in the browser
+
+function sharebutton() {
+  if (navigator.share) {
+    console.log('eee');
+    // Get the current URL
+    const currentUrl = window.location.href;
+
+    // Call the share() method with the current URL
+    navigator.share({
+      title: 'Share Title',
+      text: 'Share Description',
+      url: currentUrl, // Use the current URL
+    })
+      .then(() => console.log('Shared successfully'))
+      .catch((error) => console.error('Error sharing:', error));
+  } else {
+    // Web Share API is not supported in this browser, provide a fallback
+    // You can provide a fallback sharing method here, like opening a share dialog or copying the link to the clipboard.
+    alert('Web Share API is not supported in this browser.');
+  }
+}
