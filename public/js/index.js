@@ -232,3 +232,46 @@ function gofront(){
   document.querySelector('.serarchform').classList.remove('active');
 }
 
+
+
+// This code will be in script.js
+
+// This function creates a new YouTube player in the specified container
+function onYouTubeIframeAPIReady() {
+  var player;
+  player = new YT.Player('player', {
+    height: '360',
+    width: '640',
+    videoId: 'Arwcr-09iug', // Replace 'VIDEO_ID_HERE' with the actual YouTube video ID
+    playerVars: {
+      autoplay: 1, // Auto-play the video when the player loads
+      controls: 1, // Show video controls
+      modestbranding: 1, // Hide YouTube logo
+      rel: 0, // Don't show related videos at the end
+      showinfo: 0, // Hide video title and uploader info
+      fs: 1, // Show full-screen button
+      cc_load_policy: 0, // Hide closed captions by default
+      iv_load_policy: 3, // Hide video annotations by default
+      autohide: 0 // Don't auto-hide video controls
+    },
+    events: {
+      onReady: onPlayerReady
+    }
+  });
+}
+
+// The API will call this function when the video player is ready
+function onPlayerReady(event) {
+  // You can do something here when the video player is ready
+}
+
+
+function playvid(){
+  var element = document.querySelector("#player");
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth", // Adds smooth scrolling behavior
+      block: "start" // Scrolls to the top of the element
+    });
+  }
+}
