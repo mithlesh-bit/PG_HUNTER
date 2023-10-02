@@ -145,7 +145,7 @@ routes.get('/', async (req, resp) => {
       }
 
 
-      resp.render('index', { details, userName });
+      resp.render(' ', { details, userName });
     } catch (error) {
       console.error(error);
       resp.status(500).send("Internal Server Error");

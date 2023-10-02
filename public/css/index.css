@@ -1,6 +1,5 @@
 
   @import url('https://fonts.googleapis.com/css2?family=Catamaran&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +9,6 @@
 a {
   text-decoration: none;
 }
-
 body{
   background-color: #f3f5f7;
 }
@@ -20,8 +18,7 @@ body{
   width: 100%;
   z-index: 100;
   padding: 0 20px;
-  background-color: #1f1f1f;
-  
+  background-color: #1f1f1f; 
 }
 .nav {
   max-width: 1100px;
@@ -61,11 +58,9 @@ body{
 .button:active {
   transform: scale(0.98);
 }
-
-/* Home */
 .home {
   position: sticky;
-  height: 8vh;
+  height: 100%;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -77,8 +72,8 @@ body{
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 100;
   opacity: 0;
+  display: none;
   pointer-events: none;
   transition: all 0.5s ease-out;
 }
@@ -86,7 +81,6 @@ body{
   opacity: 1;
   pointer-events: auto;
 }
-/* From */
 .form_container {
   margin-top: 1rem;
   position: fixed;
@@ -211,24 +205,19 @@ body{
   text-align: center;
   margin-top: 15px;
 }
-
 .button_grp{
   display: flex;
   gap: 0.7rem;
 }
-
 .img{
   display:inline;
 }
-
 #forgot{
   display: none;
 }
-
 .mob__bar{
   display: none;
 }
-
 .baaar, .close_baaar{
   display: none;
   color: #ffffff;
@@ -236,7 +225,6 @@ body{
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .mobile-nav{
   display: none;
   width: 300px;
