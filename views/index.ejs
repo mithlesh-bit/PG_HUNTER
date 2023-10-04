@@ -79,6 +79,9 @@
             <li class="mob_nav_item">
               <a href="/" class="mob_nav_link active">Home</a>
               <a href="/landing" class="mob_nav_link">About</a>
+              <button onclick="playvid()"  href="" class="button mob-button">How to Signup 
+                <i class="fa-brands fa-youtube"></i>
+              </button>
               
               <% if (userName && userName.name) { %>
                   <a href="dashboard" class="mob_nav_link" id="loginbtn">
@@ -218,7 +221,7 @@
   <!-- list start -->
   <%- include('list.ejs') %>
 
-  <div class="mx-auto bg-white my-4" id="player"></div>
+  <div class="mx-auto bg-white my-4 w-11/12 sm:max-w-2xl sm:" id="player"></div>
 
   <footer class="bg-gray-300 pt-8 pb-6">
     <div class="container mx-auto px-4">

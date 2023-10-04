@@ -154,7 +154,6 @@ function registerhandle() {
   const password = form.querySelector('input[name="pass"]').value;
   const repassword = form.querySelector('input[name="repass"]').value;
 
-  console.log("1");
 
   fetch('/register', {
     method: 'POST',
@@ -240,8 +239,6 @@ function gofront(){
 function onYouTubeIframeAPIReady() {
   var player;
   player = new YT.Player('player', {
-    height: '360',
-    width: '640',
     videoId: 'Arwcr-09iug', // Replace 'VIDEO_ID_HERE' with the actual YouTube video ID
     playerVars: {
       autoplay: 1, // Auto-play the video when the player loads
@@ -267,6 +264,7 @@ function onPlayerReady(event) {
 
 
 function playvid(){
+  close_mob_bar()
   var element = document.querySelector("#player");
   if (element) {
     element.scrollIntoView({
